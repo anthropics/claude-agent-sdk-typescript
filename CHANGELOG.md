@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Updated to parity with Claude Code v2.0.1
+
 ## 0.1.0
 
 - **Merged prompt options**: The `customSystemPrompt` and `appendSystemPrompt` fields have been merged into a single `systemPrompt` field for simpler configuration
