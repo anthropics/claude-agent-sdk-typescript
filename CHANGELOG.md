@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+- Fixed a bug where system prompt was sometimes not getting set correctly: anthropics/claude-agent-sdk-typescript#8
+
 ## 0.1.3
 
 - Updated to parity with Claude Code v2.0.1
