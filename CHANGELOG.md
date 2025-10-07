@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.10
+
+- Updated to parity with Claude Code v2.0.10
+- Added zod ^3.24.1 as peer dependency
+
 ## 0.1.9
 
 - Fixed a bug where system prompt was sometimes not getting set correctly: anthropics/claude-agent-sdk-typescript#8
