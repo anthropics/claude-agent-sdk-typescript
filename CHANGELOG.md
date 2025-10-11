@@ -11,6 +11,7 @@
 ## 0.1.12
 
 - Updated to parity with Claude Code v2.0.12
+- Increased SDK MCP channel closure timeout to 60s, addressing anthropics/claude-agent-sdk-typescript#15
 
 ## 0.1.11
 
