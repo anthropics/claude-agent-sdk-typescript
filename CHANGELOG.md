@@ -5,6 +5,7 @@
 - Updated to parity with Claude Code v2.0.25
 - Fixed a bug where project-level skills were not loading when `'project'` settings source was specified
 - Added `skills` field to `SDKSystemMessage` with list of available skills
+- Fixed a bug where some exported types were not importing correctly (anthropics/claude-agent-sdk-typescript#39)
 
 ## 0.1.22
 
