@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.25
+
+- Updated to parity with Claude Code v2.0.25
+- Fixed a bug where project-level skills were not loading when `'project'` settings source was specified
+- Added `skills` field to `SDKSystemMessage` with list of available skills
+
 ## 0.1.22
 
 - Updated to parity with Claude Code v2.0.22
