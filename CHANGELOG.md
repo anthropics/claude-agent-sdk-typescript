@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.27
+
+- Updated to parity with Claude Code v2.0.27
+- Added `plugins` field to `Options`
+
 ## 0.1.26
 
 - Updated to parity with Claude Code v2.0.26
