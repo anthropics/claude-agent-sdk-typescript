@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.28
+
+- Updated to parity with Claude Code v2.0.28
+- Fixed a bug where custom tools were timing out after 30 seconds instead of respecting `MCP_TOOL_TIMEOUT` (anthropics/claude-agent-sdk-typescript#42)
+
 ## 0.1.27
 
 - Updated to parity with Claude Code v2.0.27
