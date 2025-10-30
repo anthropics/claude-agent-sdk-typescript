@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.30
+
+- Added --max-budget-usd flag
+- Fixed a bug where hooks were sometimes failing in stream mode
+- Updated to parity with Claude Code v2.0.31
+
 ## 0.1.29
 
 - Updated to parity with Claude Code v2.0.29
