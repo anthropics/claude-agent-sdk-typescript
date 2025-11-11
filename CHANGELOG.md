@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.37
+
+- Updated to parity with Claude Code v2.0.37
+
+## 0.1.36
+
+- Updated to parity with Claude Code v2.0.36
+
+## 0.1.35
+
+- Updated to parity with Claude Code v2.0.35
+
+## 0.1.34
+
+- Updated to parity with Claude Code v2.0.34
+
+## 0.1.33
+
+- Updated to parity with Claude Code v2.0.33
+
+## 0.1.31
+
+- Updated to parity with Claude Code v2.0.32
+
 ## 0.1.30
 
 - Added --max-budget-usd flag
