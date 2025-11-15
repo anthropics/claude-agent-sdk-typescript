@@ -4,10 +4,6 @@
 
 - Updated to parity with Claude Code v2.0.41
 
-## 0.1.38
-
-- Updated to parity with Claude Code v2.0.38
-
 ## 0.1.37
 
 - Updated to parity with Claude Code v2.0.37
