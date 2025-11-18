@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.45
+
+- Add support for Azure AI Foundry! See https://code.claude.com/docs/en/azure-ai-foundry
+- Added support for structured JSON outputs via `outputFormat` option
+- Updated to parity with Claude Code v2.0.45
+
 ## 0.1.44
 
 - Updated to parity with Claude Code v2.0.44
