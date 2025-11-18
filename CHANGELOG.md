@@ -2,7 +2,7 @@
 
 ## 0.1.45
 
-- Add support for Azure AI Foundry! See https://code.claude.com/docs/en/azure-ai-foundry
+- Structured outputs support. Agents can now return validated JSON matching your schema. See https://docs.claude.com/en/docs/agent-sdk/structured-outputs.
 - Added support for structured JSON outputs via `outputFormat` option
 - Updated to parity with Claude Code v2.0.45
 
