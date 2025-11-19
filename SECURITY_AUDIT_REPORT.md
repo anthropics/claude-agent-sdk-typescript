@@ -243,8 +243,7 @@ If an attacker successfully injects prompts (see H-01), they could:
 #### Remediation
 1. **Use stricter patterns**: Limit wildcard scope
    ```markdown
-   allowed-tools: Bash(gh label list),Bash(gh issue view ${{ github.event.issue.number }}),Bash(gh issue edit ${{ github.event.issue.number }}:--add-label *),Bash(gh search issues:*)
-   ```
+   allowed-tools: Bash(gh label list),Bash(gh issue view <issue-number>),Bash(gh issue edit <issue-number>:--add-label *),Bash(gh search issues:*)
 2. **Validate command execution**: Add post-execution validation
 3. **Use principle of least privilege**: Only allow exact commands needed
 
