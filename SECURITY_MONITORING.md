@@ -214,7 +214,7 @@ jobs:
             --json databaseId \
             --jq 'length')
 
-          echo "Recent failures: \$FAILURES"
+          echo "Recent failures: $FAILURES"
 
           if [ \$FAILURES -gt 5 ]; then
             echo "::warning::Multiple workflow failures detected: \$FAILURES recent failures"
