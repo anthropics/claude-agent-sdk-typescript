@@ -1,9 +1,5 @@
 # Changelog
 
-## 0.1.46
-
-- Updated to parity with Claude Code v2.0.46
-
 ## 0.1.45
 
 - Add support for Azure AI Foundry! See https://code.claude.com/docs/en/azure-ai-foundry
