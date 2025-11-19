@@ -51,7 +51,21 @@ jobs:
           echo "=== Issue Triage Workflow Completed ==="
           echo "Status: ${{ steps.claude_triage.outcome }}"
           echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-          if [ "${{ steps.claude_triage.outcome }}" != "success" ]; then
-            echo "WARNING: Triage step did not complete successfully"
-          fi
+          case "${{ steps.claude_triage.outcome }}" in
+            success)
+              # No warning needed
+              ;;
+            failure)
+              echo "WARNING: Triage step failed"
+              ;;
+            cancelled)
+              echo "WARNING: Triage step was cancelled"
+              ;;
+            skipped)
+              echo "WARNING: Triage step was skipped"
+              ;;
+            *)
+              echo "WARNING: Triage step had unknown outcome: ${{ steps.claude_triage.outcome }}"
+              ;;
+          esac
           echo "========================================"
