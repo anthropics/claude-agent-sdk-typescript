@@ -516,6 +516,6 @@ gh issue list --limit 20 --json number,title,author,createdAt --jq '.[] | "\(.nu
 
 ---
 
-**Last Updated**: 2025-11-19
-**Next Review**: 2025-12-19
+**Last Updated**: {{LAST_UPDATED}}
+**Next Review**: {{NEXT_REVIEW}}
 **Document Owner**: Security Team
