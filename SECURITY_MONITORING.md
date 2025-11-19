@@ -229,7 +229,7 @@ jobs:
             --json number,createdAt \
             --jq 'length')
 
-          echo "Recent issues: \$RECENT_ISSUES"
+          echo "Recent issues: $RECENT_ISSUES"
 
           if [ \$RECENT_ISSUES -gt 30 ]; then
             echo "::warning::High issue creation rate: \$RECENT_ISSUES issues"
