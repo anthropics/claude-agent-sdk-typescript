@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(gh label list:*),Bash(gh issue view:*),Bash(gh issue edit:*),Bash(gh search:*)
+allowed-tools: Bash(gh label list),Bash(gh issue view:*),Bash(gh issue edit:* --add-label *),Bash(gh search:issues *)
 description: Apply labels to GitHub issues
 ---
 
