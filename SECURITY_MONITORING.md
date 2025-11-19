@@ -429,7 +429,7 @@ Run this script via cron:
 
 ```bash
 # Send alert to Slack webhook
-curl -X POST \$SLACK_WEBHOOK_URL \
+curl -X POST $SLACK_WEBHOOK_URL \
   -H 'Content-Type: application/json' \
   -d '{
     "text": "⚠️ Security Alert: High workflow execution rate detected",
