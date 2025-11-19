@@ -24,7 +24,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Log issue information
+        run: |
+          echo "=== Issue Triage Workflow Started ==="
+          echo "Repository: ${{ github.repository }}"
+          echo "Issue Number: ${{ github.event.issue.number }}"
+          echo "Issue Author: ${{ github.event.issue.user.login }}"
+          echo "Workflow Run ID: ${{ github.run_id }}"
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "========================================"
+
       - name: Run Claude Code for Issue Triage
+        id: claude_triage
         uses: anthropics/claude-code-action@main
         with:
           prompt: "/label-issue REPO: ${{ github.repository }} ISSUE_NUMBER: ${{ github.event.issue.number }}"
@@ -32,3 +43,15 @@ jobs:
           allowed_non_write_users: "" # Restrict to users with write access only
           github_token: ${{ secrets.GITHUB_TOKEN }}
           max_budget_usd: "0.10" # Limit cost to 10 cents per execution
+        continue-on-error: true
+
+      - name: Log completion status
+        if: always()
+        run: |
+          echo "=== Issue Triage Workflow Completed ==="
+          echo "Status: ${{ steps.claude_triage.outcome }}"
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          if [ "${{ steps.claude_triage.outcome }}" != "success" ]; then
+            echo "WARNING: Triage step did not complete successfully"
+          fi
+          echo "========================================"
