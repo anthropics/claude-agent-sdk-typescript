@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.47
+
+- Updated to parity with Claude Code v2.0.47
+- Add `error` field to some messages
+
 ## 0.1.46
 
 - Updated to parity with Claude Code v2.0.46
