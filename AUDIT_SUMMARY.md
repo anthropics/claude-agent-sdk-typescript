@@ -55,7 +55,7 @@ Security audit identified **3 HIGH severity** vulnerabilities in the GitHub Acti
    ```yaml
    # Line 24 in .github/workflows/issue-triage.yml
    - prompt: "/label-issue REPO: ${{ github.repository }} ISSUE_NUMBER: ${{ github.event.issue.number }}"
-   + # Add colon after ISSUE_NUMBER ─────────────────────────────────────^
+   + # Add colon after ISSUE_NUMBER                     ^───────────────
    ```
 
 2. **Add cost controls** (10 minutes)
