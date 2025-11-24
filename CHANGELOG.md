@@ -3,6 +3,7 @@
 ## 0.1.51
 
 - Updated to parity with Claude Code v2.0.51
+- Added support for Opus 4.5! https://www.anthropic.com/news/claude-opus-4-5
 
 ## 0.1.50
 
