@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.54
+
+- Updated to parity with Claude Code v2.0.54
+- Added experimental v2 session APIs (`unstable_v2_createSession`, `unstable_v2_resumeSession`, `unstable_v2_prompt`) for simpler multi-turn conversations
+- Fixed a bug where ExitPlanMode tool input was empty
+
 ## 0.1.53
 
 - Updated to parity with Claude Code v2.0.53
