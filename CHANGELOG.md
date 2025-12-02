@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.56
+
+- Updated to parity with Claude Code v2.0.56
+
 ## 0.1.55
 
 - Update to parity with Claude Code v2.0.55
