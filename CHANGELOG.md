@@ -3,6 +3,7 @@
 ## 0.1.57
 
 - Updated to parity with Claude Code v2.0.57
+- Added `tools` option to specify the exact set of built-in tools available to the agent. Use `tools: ['Bash', 'Read', 'Edit']` for a strict allowlist, `tools: []` to disable all built-in tools, or `tools: { type: 'preset', preset: 'claude_code' }` for all default tools. Omitting this option preserves existing behavior where all built-in tools are available (and can be filtered with `disallowedTools`).
 
 ## 0.1.56
 
