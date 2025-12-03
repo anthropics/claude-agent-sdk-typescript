@@ -51,7 +51,7 @@
 ## 0.1.45
 
 - Add support for Microsoft Foundry! See https://code.claude.com/docs/en/azure-ai-foundry
-- Structured outputs support. Agents can now return validated JSON matching your schema. See https://docs.claude.com/en/docs/agent-sdk/structured-outputs.
+- Structured outputs support. Agents can now return validated JSON matching your schema. See https://platform.claude.com/docs/en/agent-sdk/structured-outputs.
 - Updated to parity with Claude Code v2.0.45
 
 ## 0.1.44
@@ -191,9 +191,9 @@
 - **No default system prompt**: The Claude Code system prompt is no longer included by default, giving you full control over agent behavior. To use the Claude Code system prompt, explicitly set:
 - **No filesystem settings by default**: Settings files (`settings.json`, `CLAUDE.md`), slash commands, and subagents are no longer loaded automatically. This ensures SDK applications have predictable behavior independent of local filesystem configurations
 - **Explicit settings control**: Use the new `settingSources` field to specify which settings locations to load: `["user", "project", "local"]`
-- **Programmatic subagents**: Subagents can now be defined inline in code using the `agents` option, enabling dynamic agent creation without filesystem dependencies. [Learn more](https://docs.claude.com/en/api/agent-sdk/subagents)
-- **Session forking**: Resume sessions with the new `forkSession` option to branch conversations and explore different approaches from the same starting point. [Learn more](https://docs.claude.com/en/api/agent-sdk/sessions)
+- **Programmatic subagents**: Subagents can now be defined inline in code using the `agents` option, enabling dynamic agent creation without filesystem dependencies. [Learn more](https://platform.claude.com/docs/en/agent-sdk/subagents)
+- **Session forking**: Resume sessions with the new `forkSession` option to branch conversations and explore different approaches from the same starting point. [Learn more](https://platform.claude.com/docs/en/agent-sdk/sessions)
 - **Granular settings control**: The `settingSources` option gives you fine-grained control over which filesystem settings to load, improving isolation for CI/CD, testing, and production deployments
-- Comprehensive documentation now available in the [API Guide](https://docs.claude.com/en/api/agent-sdk/overview)
-- New guides for [Custom Tools](https://docs.claude.com/en/api/agent-sdk/custom-tools), [Permissions](https://docs.claude.com/en/api/agent-sdk/permissions), [Session Management](https://docs.claude.com/en/api/agent-sdk/sessions), and more
-- Complete [TypeScript API reference](https://docs.claude.com/en/api/agent-sdk/typescript)
+- Comprehensive documentation now available in the [API Guide](https://platform.claude.com/docs/en/agent-sdk/overview)
+- New guides for [Custom Tools](https://platform.claude.com/docs/en/agent-sdk/custom-tools), [Permissions](https://platform.claude.com/docs/en/agent-sdk/permissions), [Session Management](https://platform.claude.com/docs/en/agent-sdk/sessions), and more
+- Complete [TypeScript API reference](https://platform.claude.com/docs/en/agent-sdk/typescript)
