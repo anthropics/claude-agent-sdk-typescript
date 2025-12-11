@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.65
+
+- Updated to parity with Claude Code v2.0.66
+
+## 0.1.64
+
+- Fixed issues where SDK MCP servers, hooks, or canUseTool callbacks could fail when stdin was closed too early after the first result
+- Updated to parity with Claude Code v2.0.64
+
+## 0.1.63
+
+- Updated to parity with Claude Code v2.0.63
+
 ## 0.1.61
 
 - Updated to parity with Claude Code v2.0.61
