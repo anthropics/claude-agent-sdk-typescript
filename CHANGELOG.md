@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.1.67
+
+- Updated to parity with Claude Code v2.0.67
+
 ## 0.1.66
 
 - Fixed project MCP servers from `.mcp.json` not being available when `settingSources` includes `project`
+- Updated to parity with Claude Code v2.0.66
 
 ## 0.1.65
 
