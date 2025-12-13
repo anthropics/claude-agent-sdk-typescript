@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.69
+
+- Updated to parity with Claude Code v2.0.69
+
 ## 0.1.68
 
 - Fixed a bug where disallowed MCP tools were visible to the model
