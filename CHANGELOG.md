@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.70
+
+- Fixed a bug where passing the `env` option would cause the process to crash with `spawn node ENOENT` because the user-provided environment variables replaced `process.env` entirely instead of merging with it
+
 ## 0.1.69
 
 - Updated to parity with Claude Code v2.0.69
