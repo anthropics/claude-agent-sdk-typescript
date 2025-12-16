@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.71
+
+- Added zod `^4.0.0` as peer dependency option in addition to zod `^3.24.1`
+- Added support for AskUserQuestion tool. If using `tools` option, enable by including `'AskUserQuestion'` in list
+- Fixed visible console window appearing when spawning Claude subprocess on Windows
+- Fixed spawn message being sent to stderr callback (anthropics/claude-agent-sdk-typescript#45)
+- Updated to parity with Claude Code v2.0.71
+
 ## 0.1.69
 
 - Updated to parity with Claude Code v2.0.69
