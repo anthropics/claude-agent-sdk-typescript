@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.72
+
+- Fixed `/context` command not respecting custom system prompts
+- Fixed non-streaming single-turn queries to close immediately on first result instead of waiting for inactivity timeout
+- Changed V2 session API method `receive()` to `stream()` for consistency with Anthropic SDK patterns
+- Updated to parity with Claude Code v2.0.72
+
 ## 0.1.71
 
 - Added zod `^4.0.0` as peer dependency option in addition to zod `^3.24.1`
