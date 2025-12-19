@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.74
+
+- Updated to parity with Claude Code v2.0.74
+
 ## 0.1.73
 
 - Fixed a bug where Stop hooks would not consistently run due to `Stream closed` error
