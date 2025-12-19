@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.73
+
+- Fixed a bug where Stop hooks would not consistently run due to `Stream closed` error
+- Updated to parity with Claude Code v2.0.73
+
 ## 0.1.72
 
 - Fixed `/context` command not respecting custom system prompts
