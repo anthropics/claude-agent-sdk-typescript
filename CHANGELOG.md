@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+
+- Updated to parity with Claude Code v2.1.3
+
 ## 0.2.0 (2026-01-07)
 
 - Added `error` field to `McpServerStatus` for failed MCP server connections
