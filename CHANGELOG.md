@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.6
+
+- Updated to parity with Claude Code v2.1.6
+- Added `claudeCodeVersion` field to `package.json` for programmatically determining compatible CLI version
+
 ## 0.2.5
 
 - Updated to parity with Claude Code v2.1.5
