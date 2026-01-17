@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.11
+
+- Updated to parity with Claude Code v2.1.11
+
+## 0.2.10
+
+- Added `skills` and `maxTurns` configuration options to custom agent definitions.
+
 ## 0.2.9
 
 - Updated to parity with Claude Code v2.1.9
