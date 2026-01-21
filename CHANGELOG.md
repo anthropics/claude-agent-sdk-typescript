@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.15
+
+- Added notification hook support
+- Added `close()` method to Query interface for forcefully terminating running queries
+- Updated to parity with Claude Code v2.1.15
+
 ## 0.2.14
 
 - Updated to parity with Claude Code v2.1.14
