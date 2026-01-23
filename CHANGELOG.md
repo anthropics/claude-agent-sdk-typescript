@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.19
+
+- Added `CLAUDE_CODE_ENABLE_TASKS` env var, set to `true` to opt into the new task system
+
 ## 0.2.17
 
 - Updated to parity with Claude Code v2.1.17
