@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.20
+
+- Added support for loading CLAUDE.md files from directories specified via `additionalDirectories` option (requires setting `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` in the `env` option)
+- Added `CLAUDE_CODE_ENABLE_TASKS` env var, set to `true` to opt into the new task system
+- Updated to parity with Claude Code v2.1.20
+
 ## 0.2.19
 
 - Added `CLAUDE_CODE_ENABLE_TASKS` env var, set to `true` to opt into the new task system
