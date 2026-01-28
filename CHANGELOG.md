@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.22
+
+- Fixed structured outputs to handle empty assistant messsages
+- Updated to parity with Claude Code v2.1.22
+
 ## 0.2.21
 
 - Added `config`, `scope`, and `tools` fields to `McpServerStatus` for richer server introspection
