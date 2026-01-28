@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.21
+
+- Added `config`, `scope`, and `tools` fields to `McpServerStatus` for richer server introspection
+- Added `reconnectMcpServer()` and `toggleMcpServer()` methods for managing MCP server connections
+- Added `disabled` status to `McpServerStatus`
+- Fixed PermissionRequest hooks not being executed in SDK mode (e.g., VS Code extension)
+- Updated to parity with Claude Code v2.1.21
+
 ## 0.2.20
 
 - Added support for loading CLAUDE.md files from directories specified via `additionalDirectories` option (requires setting `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` in the `env` option)
