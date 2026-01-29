@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.25
+
+- Updated to parity with Claude Code v2.1.25
+
 ## 0.2.23
 
 - Fixed structured output validation errors not being reported correctly
