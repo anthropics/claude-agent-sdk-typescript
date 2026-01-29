@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.23
+
+- Fixed structured output validation errors not being reported correctly
+- Updated to parity with Claude Code v2.1.23
+
 ## 0.2.22
 
 - Fixed structured outputs to handle empty assistant messsages
