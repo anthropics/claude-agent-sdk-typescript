@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.27
+
+- Added `listSessions` function to discover resumable sessions by project, repo, or globally
+- Added optional `annotations` support to the `tool()` helper function for specifying MCP tool hints (readOnlyHint, destructiveHint, openWorldHint, idempotentHint)
+- Fixed `mcpServerStatus()` to include tools from SDK and dynamically-added MCP servers
+- Updated to parity with Claude Code v2.1.27
+
 ## 0.2.25
 
 - Updated to parity with Claude Code v2.1.25
