@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.29
+
+- Updated to parity with Claude Code v2.1.29
+
 ## 0.2.27
 
 - Added optional `annotations` support to the `tool()` helper function for specifying MCP tool hints (readOnlyHint, destructiveHint, openWorldHint, idempotentHint)
