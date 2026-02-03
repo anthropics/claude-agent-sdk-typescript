@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.30
+
+- Added `debug` and `debugFile` options for programmatic control of debug logging
+- Added optional `pages` field to `FileReadToolInput` for reading specific PDF page ranges
+- Added `parts` output type to `FileReadToolOutput` for page-extracted PDF results
+- Fixed "(no content)" placeholder messages being included in SDK output
+
 ## 0.2.29
 
 - Updated to parity with Claude Code v2.1.29
