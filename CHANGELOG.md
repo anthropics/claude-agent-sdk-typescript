@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.31
+
+- Added `stop_reason` field to `SDKResultSuccess` and `SDKResultError` to indicate why the model stopped generating
+
 ## 0.2.30
 
 - Added `debug` and `debugFile` options for programmatic control of debug logging
