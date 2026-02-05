@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.32
+
+- Updated to parity with Claude Code v2.1.32
+
 ## 0.2.31
 
 - Added `stop_reason` field to `SDKResultSuccess` and `SDKResultError` to indicate why the model stopped generating
