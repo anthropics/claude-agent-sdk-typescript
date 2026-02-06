@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.34
+
+- Updated to parity with Claude Code v2.1.34
+
 ## 0.2.33
 
 - Added `TeammateIdle` and `TaskCompleted` hook events with corresponding `TeammateIdleHookInput` and `TaskCompletedHookInput` types
