@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.33
+
+- Added `TeammateIdle` and `TaskCompleted` hook events with corresponding `TeammateIdleHookInput` and `TaskCompletedHookInput` types
+- Added `sessionId` option to specify a custom UUID for conversations instead of auto-generated ones
+- Updated to parity with Claude Code v2.1.33
+
 ## 0.2.32
 
 - Updated to parity with Claude Code v2.1.32
