@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.45
+
+- Added support for Claude Sonnet 4.6
+- Added `task_started` system message to the SDK stream, emitted when subagent tasks are registered
+- Fixed `Session.stream()` returning prematurely when background subagents are still running, by holding back intermediate result messages until all tasks complete
+- Improved memory usage for shell commands that produce large output — RSS no longer grows unboundedly with command output size
+
 ## 0.2.44
 
 - Updated to parity with Claude Code v2.1.44
