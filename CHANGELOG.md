@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.47
+
+- Updated to parity with Claude Code v2.1.47
+- Added `promptSuggestion()` method on `Query` to request prompt suggestions based on the current conversation context
+- Added `tool_use_id` field to `task_notification` events for correlating task completions with originating tool calls
+
+## 0.2.46
+
+- Updated to parity with Claude Code v2.1.46
+
 ## 0.2.45
 
 - Added support for Claude Sonnet 4.6
