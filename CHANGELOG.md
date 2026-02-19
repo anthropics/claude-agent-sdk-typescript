@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.49
+
+- Updated to parity with Claude Code v2.1.49
+- SDK model info now includes `supportsEffort`, `supportedEffortLevels`, and `supportsAdaptiveThinking` fields so consumers can discover model capabilities.
+- Permission suggestions are now populated when safety checks trigger an ask response, enabling SDK consumers to display permission options.
+- Added `ConfigChange` hook event that fires when configuration files change during a session, enabling enterprise security auditing and optional blocking of settings changes.
+
 ## 0.2.47
 
 - Updated to parity with Claude Code v2.1.47
