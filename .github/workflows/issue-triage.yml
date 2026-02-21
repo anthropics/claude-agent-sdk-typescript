@@ -8,6 +8,12 @@ jobs:
   triage-issue:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
+    # Prevent concurrent executions for the same issue
+    concurrency:
+      group: issue-triage-${{ github.event.issue.number }}
+      cancel-in-progress: false
+
     permissions:
       contents: read
       issues: write
@@ -18,10 +24,48 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Log issue information
+        run: |
+          echo "=== Issue Triage Workflow Started ==="
+          echo "Repository: ${{ github.repository }}"
+          echo "Issue Number: ${{ github.event.issue.number }}"
+          echo "Issue Author: ${{ github.event.issue.user.login }}"
+          echo "Workflow Run ID: ${{ github.run_id }}"
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "========================================"
+
       - name: Run Claude Code for Issue Triage
+        id: claude_triage
         uses: anthropics/claude-code-action@main
         with:
-          prompt: "/label-issue REPO: ${{ github.repository }} ISSUE_NUMBER${{ github.event.issue.number }}"
+          prompt: "/label-issue REPO: ${{ github.repository }} ISSUE_NUMBER: ${{ github.event.issue.number }}"
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          allowed_non_write_users: "*" # Required for issue triage workflow, if users without repo write access create issues
+          allowed_non_write_users: "" # Restrict to users with write access only
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          max_budget_usd: "0.10" # Limit cost to 10 cents per execution
+        continue-on-error: true
+
+      - name: Log completion status
+        if: always()
+        run: |
+          echo "=== Issue Triage Workflow Completed ==="
+          echo "Status: ${{ steps.claude_triage.outcome }}"
+          echo "Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          case "${{ steps.claude_triage.outcome }}" in
+            success)
+              # No warning needed
+              ;;
+            failure)
+              echo "WARNING: Triage step failed"
+              ;;
+            cancelled)
+              echo "WARNING: Triage step was cancelled"
+              ;;
+            skipped)
+              echo "WARNING: Triage step was skipped"
+              ;;
+            *)
+              echo "WARNING: Triage step had unknown outcome: ${{ steps.claude_triage.outcome }}"
+              ;;
+          esac
+          echo "========================================"
