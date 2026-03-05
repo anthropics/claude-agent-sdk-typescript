@@ -8,18 +8,6 @@
 
 - Updated to parity with Claude Code v2.1.66
 
-## 0.2.65
-
-- Updated to parity with Claude Code v2.1.65
-
-## 0.2.64
-
-- Added `DirectConnectTransport` — connect the SDK to a running `claude server` instance over WebSocket. Supports stable session keys for persistent multi-turn conversations across reconnects.
-- Added `agent_id` (for subagents) and `agent_type` (for subagents and `--agent`) fields to hook events
-- Added optional `blobSavedTo` field to `ReadMcpResourceToolOutput` indicating where binary blob content was saved to disk
-- Fixed breaking change: `system:init` and `result` events now emit `'Task'` as the Agent tool name again (reverted from `'Agent'`, which was an unintentional breaking change in a patch release). The wire name will migrate to `'Agent'` in the next minor release.
-- Fixed control responses with malformed `updatedPermissions` from SDK hosts blocking tool calls with a ZodError; the invalid field is now stripped and a warning is logged instead.
-
 ## 0.2.63
 
 - SDK: Fixed `pathToClaudeCodeExecutable` failing when set to a bare command name (e.g., `"claude"`) that should resolve via PATH
