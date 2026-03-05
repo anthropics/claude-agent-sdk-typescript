@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.69
+
+- Added `toolConfig.askUserQuestion.previewFormat` option to configure the content format (`'markdown'` or `'html'`) for the `preview` field on AskUserQuestion tool options. The `preview` field and `annotations` output are now exposed in the public SDK types.
+- Added `supportsFastMode` field to `ModelInfo` indicating whether a model supports fast mode
+- Added `agent_id` (for subagents) and `agent_type` (for subagents and `--agent`) fields to hook events
+- Fixed SDK-mode MCP servers (registered via `sdkMcpServers` in the `initialize` control request) getting disconnected when background plugin installation refreshes project MCP config
+- Fixed breaking change: `system:init` and `result` events now emit `'Task'` as the Agent tool name again (reverted from `'Agent'`, which was an unintentional breaking change in a patch release). The wire name will migrate to `'Agent'` in the next minor release.
+- Fixed control responses with malformed `updatedPermissions` from SDK hosts blocking tool calls with a ZodError; the invalid field is now stripped and a warning is logged instead.
+- Improved memory usage of `getSessionMessages()` for large sessions with compacted history
+
 ## 0.2.68
 
 - Updated to parity with Claude Code v2.1.68
