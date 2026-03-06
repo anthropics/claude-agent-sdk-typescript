@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.70
+
+- Fixed `type: "http"` MCP servers failing with HTTP 406 "Not Acceptable" on Streamable HTTP servers that strictly enforce the `Accept: application/json, text/event-stream` header
+- Changed `AgentToolInput.subagent_type` to optional — defaults to the `general-purpose` agent when omitted
+- Updated to parity with Claude Code v2.1.70
+
 ## 0.2.69
 
 - Added `toolConfig.askUserQuestion.previewFormat` option to configure the content format (`'markdown'` or `'html'`) for the `preview` field on AskUserQuestion tool options. The `preview` field and `annotations` output are now exposed in the public SDK types.
