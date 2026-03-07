@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.71
+
+- Updated to parity with Claude Code v2.1.71
+
 ## 0.2.70
 
 - Fixed `type: "http"` MCP servers failing with HTTP 406 "Not Acceptable" on Streamable HTTP servers that strictly enforce the `Accept: application/json, text/event-stream` header
