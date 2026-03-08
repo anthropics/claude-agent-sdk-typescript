@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed `./sdk-tools` subpath not being resolvable since v0.2.69 by adding the missing `exports` entry to `package.json` (#218)
+
 ## 0.2.71
 
 - Updated to parity with Claude Code v2.1.71
