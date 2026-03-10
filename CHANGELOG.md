@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.72
+
+- Added `agentProgressSummaries` option to enable periodic AI-generated progress summaries for running subagents (foreground and background), emitted on `task_progress` events via the new `summary` field
+- Added `getSettings()` `applied` section with runtime-resolved `model` and `effort` values
+- Fixed `toggleMcpServer` and `reconnectMcpServer` failing with "Server not found" for servers passed via `query({mcpServers})`
+- Updated to parity with Claude Code v2.1.72
+
 ## 0.2.71
 
 - Updated to parity with Claude Code v2.1.71
