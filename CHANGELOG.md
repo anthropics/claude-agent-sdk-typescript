@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.73
+
+- Fixed `options.env` being overridden by the `~/.claude/settings.json` env block when not using `user` as a `settingSources` option
+- Updated to parity with Claude Code v2.1.73
+
 ## 0.2.72
 
 - Added `agentProgressSummaries` option to enable periodic AI-generated progress summaries for running subagents (foreground and background), emitted on `task_progress` events via the new `summary` field
