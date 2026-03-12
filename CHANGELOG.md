@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.74
+
+- Added `renameSession(sessionId, title, opts?)` for renaming session files
+- Fixed `import type` from `@anthropic-ai/claude-agent-sdk/sdk-tools` failing under NodeNext/Bundler module resolution (missing exports map entry since v0.2.69)
+- Fixed skills with `user-invocable: false` being included in `supportedCommands()` and the `system:init` message's `slash_commands` / `skills` lists
+- Updated to parity with Claude Code v2.1.74
+
 ## 0.2.73
 
 - Fixed `options.env` being overridden by the `~/.claude/settings.json` env block when not using `user` as a `settingSources` option
