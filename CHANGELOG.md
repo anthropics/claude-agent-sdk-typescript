@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.75
+
+- Updated to parity with Claude Code v2.1.75
+
 ## 0.2.74
 
 - Added `renameSession(sessionId, title, opts?)` for renaming session files
