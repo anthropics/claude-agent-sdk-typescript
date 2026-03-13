@@ -2,6 +2,12 @@
 
 ## 0.2.75
 
+- Added `tag` and `createdAt` fields to `SDKSessionInfo`
+- Added `getSessionInfo(sessionId, opts?)` for single-session metadata lookup
+- Added `offset` option to `listSessions` for pagination
+- Added `tagSession(sessionId, tag, opts?)` for tagging session files
+- Added `queued_to_running` status to `AgentToolOutput` — returned when `Agent({resume})` targets a still-running agent
+- Improved error messages when the Claude Code subprocess returns an error result — the SDK now surfaces the actual error text instead of a generic "process exited with code 1"
 - Updated to parity with Claude Code v2.1.75
 
 ## 0.2.74
