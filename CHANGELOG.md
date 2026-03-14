@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.76
+
+- Added `forkSession(sessionId, opts?)` for branching conversations from a point
+- Added `cancel_async_message` control subtype to drop a queued user message by UUID before execution
+- Added `planFilePath` field to `ExitPlanMode` tool input for hooks and SDK consumers
+- Added MCP elicitation hook types and `SDKElicitationCompleteMessage` system message for handling MCP server input requests programmatically
+- Updated to parity with Claude Code v2.1.76
+
 ## 0.2.75
 
 - Added `tag` and `createdAt` fields to `SDKSessionInfo`
