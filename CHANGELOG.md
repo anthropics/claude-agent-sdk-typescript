@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.77
+
+- Added `api_retry` system messages when retrying transient API errors, exposing attempt count, max retries, delay, and error status
+- Updated to parity with Claude Code v2.1.77
+
 ## 0.2.76
 
 - Added `forkSession(sessionId, opts?)` for branching conversations from a point
