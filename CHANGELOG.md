@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.79
+
+- Added `'resume'` to the `ExitReason` type for distinguishing resume-triggered session ends in hooks
+- Updated to parity with Claude Code v2.1.79
+
+## 0.2.78
+
+- Updated to parity with Claude Code v2.1.78
+
 ## 0.2.77
 
 - Added `api_retry` system messages when retrying transient API errors, exposing attempt count, max retries, delay, and error status
