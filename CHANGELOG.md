@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.80
+
+- Fixed `getSessionMessages()` dropping parallel tool results — sessions with parallel tool calls now return all tool_use/tool_result pairs
+- Updated to parity with Claude Code v2.1.80
+
 ## 0.2.79
 
 - Added `'resume'` to the `ExitReason` type for distinguishing resume-triggered session ends in hooks
