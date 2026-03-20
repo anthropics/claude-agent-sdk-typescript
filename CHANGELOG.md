@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.81
+
+- Fixed `canUseTool` not providing a working `addRules` suggestion when a write under `.claude/skills/{name}/` hits the bypass-immune safety check
+- Updated to parity with Claude Code v2.1.81
+
 ## 0.2.80
 
 - Fixed `getSessionMessages()` dropping parallel tool results — sessions with parallel tool calls now return all tool_use/tool_result pairs
