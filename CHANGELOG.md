@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.83
+
+- Added `seed_read_state` control subtype to seed `readFileState` with `{path, mtime}` so `Edit` works after the originating `Read` was removed from context
+- Changed `session_state_changed` events to opt-in: set `CLAUDE_CODE_EMIT_SESSION_STATE_EVENTS=1` to receive them
+- Updated to parity with Claude Code v2.1.83
+
+## 0.2.82
+
+- Updated to parity with Claude Code v2.1.82
+
 ## 0.2.81
 
 - Fixed `canUseTool` not providing a working `addRules` suggestion when a write under `.claude/skills/{name}/` hits the bypass-immune safety check
