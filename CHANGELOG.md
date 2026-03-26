@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.85
+
+- Added `reloadPlugins()` SDK method to reload plugins and receive refreshed commands, agents, and MCP server status
+- Fixed PreToolUse hooks with `permissionDecision: "ask"` being ignored in SDK mode
+- Updated to parity with Claude Code v2.1.85
+
 ## 0.2.84
 
 - Added `taskBudget` option for API-side token budget awareness, allowing the model to pace tool use within a token limit
