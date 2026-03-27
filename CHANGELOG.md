@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.86
+
+- Added `getContextUsage()` control method to retrieve a breakdown of context window usage by category
+- Made `session_id` optional in `SDKUserMessage` type — callers no longer need to provide a session ID when sending user messages, as the SDK assigns one automatically
+- Fixed TypeScript types resolving to `any` by adding `@anthropic-ai/sdk` and `@modelcontextprotocol/sdk` as dependencies
+- Updated to parity with Claude Code v2.1.86
+
 ## 0.2.85
 
 - Added `reloadPlugins()` SDK method to reload plugins and receive refreshed commands, agents, and MCP server status
