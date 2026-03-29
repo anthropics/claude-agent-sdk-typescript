@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.87
+
+- Updated to parity with Claude Code v2.1.87
+
 ## 0.2.86
 
 - Added `getContextUsage()` control method to retrieve a breakdown of context window usage by category
