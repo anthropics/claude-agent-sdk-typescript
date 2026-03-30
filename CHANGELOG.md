@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.88
+
+- Added `includeSystemMessages` option to `getSessionMessages()` to optionally include system messages in session history
+- Added `includeHookEvents` option to enable hook lifecycle messages (`hook_started`, `hook_progress`, `hook_response`) for all hook event types
+- Fixed error result messages (`error_during_execution`, `error_max_turns`, `error_max_budget_usd`) to correctly set `is_error: true` with descriptive messages
+- Fixed `side_question` returning null on resume before the first turn completes
+- Fixed MCP servers getting permanently stuck in a failed state after a connection race — they now retry on the next message
+- Fixed `StructuredOutput` schema cache bug causing ~50% failure rate in workflows with multiple schemas
+- Fixed `ERR_STREAM_WRITE_AFTER_END` errors when single-turn queries with MCP servers or hooks have control responses arriving after the result message
+- Fixed Zod v4 field `.describe()` metadata being dropped from `createSdkMcpServer` tool schemas
+- Updated to parity with Claude Code v2.1.88
+
 ## 0.2.87
 
 - Updated to parity with Claude Code v2.1.87
