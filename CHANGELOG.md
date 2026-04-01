@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.90
+
+- Updated to parity with Claude Code v2.1.90
+
 ## 0.2.89
 
 - Added `startup()` to pre-warm the CLI subprocess before `query()`, making the first query ~20x faster when startup cost can be paid upfront
