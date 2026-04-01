@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.89
+
+- Added `startup()` to pre-warm the CLI subprocess before `query()`, making the first query ~20x faster when startup cost can be paid upfront
+- Added `includeSystemMessages` option to `getSessionMessages()` to optionally include system messages in session history
+- Added `listSubagents()` and `getSubagentMessages()` functions to retrieve subagent conversation history from sessions
+- Added `includeHookEvents` option to enable hook lifecycle messages (`hook_started`, `hook_progress`, `hook_response`) for all hook event types
+- Fixed `ERR_STREAM_WRITE_AFTER_END` errors when single-turn queries with SDK MCP servers or hooks have control responses arriving after the result message
+- Fixed Zod v4 field `.describe()` metadata being dropped from `createSdkMcpServer` tool schemas
+- Fixed `side_question` returning null on resume before the first turn completes
+- Fixed `settingSources` empty array causing `--setting-sources ""` to consume the next CLI flag
+- Fixed error result messages (`error_during_execution`, `error_max_turns`, `error_max_budget_usd`) to correctly set `is_error: true` with descriptive messages
+- Fixed MCP servers getting permanently stuck in a failed state after a connection race — they now retry on the next message
+
 ## 0.2.87
 
 - Updated to parity with Claude Code v2.1.87
