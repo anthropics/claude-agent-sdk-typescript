@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.91
+
+- Added optional `terminal_reason` field to result messages, exposing why the query loop terminated (`completed`, `aborted_tools`, `max_turns`, `blocking_limit`, etc.)
+- Added `'auto'` to the public `PermissionMode` type
+- Changed `sandbox` option to default `failIfUnavailable` to `true` when `enabled: true` is passed — `query()` will emit an error result and exit if sandbox dependencies are missing, instead of silently running unsandboxed. Set `failIfUnavailable: false` to allow graceful degradation.
+- Updated to parity with Claude Code v2.1.91
+
 ## 0.2.90
 
 - Updated to parity with Claude Code v2.1.90
