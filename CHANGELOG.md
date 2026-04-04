@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.92
+
+- Updated to parity with Claude Code v2.1.92
+
 ## 0.2.91
 
 - Added optional `terminal_reason` field to result messages, exposing why the query loop terminated (`completed`, `aborted_tools`, `max_turns`, `blocking_limit`, etc.)
