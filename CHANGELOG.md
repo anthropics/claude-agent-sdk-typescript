@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.94
+
+- Fixed `getContextUsage()` to include agents passed via `options.agents` in the `agents` breakdown
+- Fixed CJK and other multibyte text being corrupted with U+FFFD in stream-json input/output when chunk boundaries split a UTF-8 sequence
+- Fixed MCP server child processes not being cleaned up when an SDK `query()` session ends
+- Fixed a failed error-report write crashing the SDK process with `unhandledRejection`
+- Updated to parity with Claude Code v2.1.94
+
+## 0.2.93
+
+- Updated to parity with Claude Code v2.1.93
+
 ## 0.2.92
 
 - Updated to parity with Claude Code v2.1.92
