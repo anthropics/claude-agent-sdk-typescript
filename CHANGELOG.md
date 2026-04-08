@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.96
+
+- Updated to parity with Claude Code v2.1.96
+
+## 0.2.95
+
+- Updated to parity with Claude Code v2.1.95
+
 ## 0.2.94
 
 - Fixed `getContextUsage()` to include agents passed via `options.agents` in the `agents` breakdown
