@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.102
+
+- Updated to parity with Claude Code v2.1.102
+
 ## 0.2.101
 
 - Security: bumped `@anthropic-ai/sdk` to `^0.81.0` and `@modelcontextprotocol/sdk` to `^1.29.0` to resolve GHSA-5474-4w2j-mq4c and transitive hono advisories
