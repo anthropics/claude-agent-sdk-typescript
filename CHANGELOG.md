@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.105
+
+- Added `system/memory_recall` event and `memory_paths` on `system/init` for SDK renderers to surface memory operations
+- Fixed `error_max_structured_output_retries` being emitted when the final retry attempt succeeded, discarding valid structured output
+
 ## 0.2.102
 
 - Updated to parity with Claude Code v2.1.102
