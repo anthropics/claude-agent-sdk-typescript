@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.107
+
+- Updated to parity with Claude Code v2.1.107
+
+## 0.2.106
+
+- Updated to parity with Claude Code v2.1.106
+
 ## 0.2.105
 
 - Added `system/memory_recall` event and `memory_paths` on `system/init` for SDK renderers to surface memory operations
