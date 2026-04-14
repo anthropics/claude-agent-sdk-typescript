@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.108
+
+- `SDKStatus` now includes `'requesting'`; when `includePartialMessages` is enabled, a `{type:'system', subtype:'status', status:'requesting'}` message is emitted before each API request in the stream
+
 ## 0.2.107
 
 - Updated to parity with Claude Code v2.1.107
