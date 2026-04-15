@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.110
+
+- Fixed `unstable_v2_createSession` not respecting `cwd`, `settingSources`, and `allowDangerouslySkipPermissions` options
+- Added optional `shouldQuery` field to `SDKUserMessage` — set to `false` to append a user message without triggering an assistant turn; fixed `shouldQuery: false` messages incorrectly triggering auto-title generation, prompt suggestions, and `UserPromptSubmit` hooks
+- Auto session-title generation now respects `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` and `CLAUDE_CODE_DISABLE_TERMINAL_TITLE`
+
 ## 0.2.109
 
 - Updated to parity with Claude Code v2.1.109
