@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.112
+
+- Updated to parity with Claude Code v2.1.112
+
 ## 0.2.111
 
 - Opus 4.7 is now available! This version of the SDK is required to use it.
