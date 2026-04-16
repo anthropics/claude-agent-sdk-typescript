@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.111
+
+- Opus 4.7 is now available! This version of the SDK is required to use it.
+- `mcp_set_servers` control request: remote (http/sse) server entries can now carry per-tool `permission_policy` values, which are applied to the session's allow/deny rules
+- `startup()` and `WarmQuery` are now part of the public TypeScript API
+- Changed `options.env` to overlay the inherited `process.env` instead of replacing it
+
 ## 0.2.110
 
 - Fixed `unstable_v2_createSession` not respecting `cwd`, `settingSources`, and `allowDangerouslySkipPermissions` options
