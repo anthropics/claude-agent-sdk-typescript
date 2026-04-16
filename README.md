@@ -13,7 +13,7 @@ The Claude Agent SDK enables you to programmatically build AI agents with Claude
 Install the Claude Agent SDK:
 
 ```sh
-npm install @anthropic-ai/claude-agent-sdk
+npm install @anthropic-ai/claude-agent-sdk@0.2.110
 ```
 
 ## Migrating from the Claude Code SDK
