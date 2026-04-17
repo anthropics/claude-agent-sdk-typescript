@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.113
+
+- Changed the SDK to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript
+- Added `sessionStore` option (alpha) to `query()` and session helpers for mirroring session transcripts to external storage, with `SessionStore`/`SessionKey`/`SessionStoreEntry` types, `InMemorySessionStore` reference implementation, and `importSessionToStore()` for migrating existing sessions
+- Added `deleteSession()` for removing a session from disk or a `SessionStore`
+- Added `SDKMirrorErrorMessage` (`subtype: 'mirror_error'`) to the `SDKMessage` union — emitted when a `sessionStore.append()` batch fails
+- **Breaking**: `options.env` once again replaces `process.env` for the CLI subprocess instead of overlaying it. To add or override individual variables, pass `env: { ...process.env, MY_VAR: "x" }`
+- Added `title` option to `query()` — sets the session title and skips auto-generation
+- Added OpenTelemetry trace context propagation — the caller's active trace context is forwarded to the CLI subprocess so spans parent under your distributed trace
+
 ## 0.2.112
 
 - Updated to parity with Claude Code v2.1.112
