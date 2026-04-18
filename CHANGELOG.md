@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.114
+
+- Updated to parity with Claude Code v2.1.114
+
 ## 0.2.113
 
 - Changed the SDK to spawn a native Claude Code binary (via a per-platform optional dependency) instead of bundled JavaScript
