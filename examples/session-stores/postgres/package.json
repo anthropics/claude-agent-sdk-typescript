@@ -1,0 +1,23 @@
+{
+  "name": "claude-agent-sdk-example-postgres-session-store",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Reference Postgres-backed SessionStore adapter for the Claude Agent SDK (example, not published)",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "bun test test/PostgresSessionStore.test.ts",
+    "test:live": "bun test test/conformance.live.test.ts",
+    "demo": "bun run demo.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.0",
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT"
+}
