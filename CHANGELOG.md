@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.118
+
+- Added `Options.managedSettings` for embedders to pass policy-tier settings to the spawned CLI in-memory, honored below IT-controlled managed sources
+
 ## 0.2.117
 
 - Updated to parity with Claude Code v2.1.117
