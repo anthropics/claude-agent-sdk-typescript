@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.119
+
+- `excludeDynamicSections` now keeps static auto-memory instructions in the cacheable system-prompt block; only the per-user memory directory path and per-machine environment values are relocated to the first user message
+- Long-running SDK sessions now reconnect claude.ai-proxied MCP servers after a transport-stream abort
+- `SessionStore.append()` failures are now retried up to 3 times with short backoff before the batch is dropped and `mirror_error` is emitted
+
 ## 0.2.118
 
 - Added `Options.managedSettings` for embedders to pass policy-tier settings to the spawned CLI in-memory, honored below IT-controlled managed sources
