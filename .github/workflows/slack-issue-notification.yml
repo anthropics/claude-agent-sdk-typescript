@@ -8,29 +8,47 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+      - name: Build Slack payload
+        id: payload
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          REPO_NAME: ${{ github.repository }}
+        run: |
+          PAYLOAD=$(jq -nc \
+            --arg channel "C09HY5E0K60" \
+            --arg repo "$REPO_NAME" \
+            --arg url "$ISSUE_URL" \
+            --arg num "$ISSUE_NUMBER" \
+            --arg title "$ISSUE_TITLE" \
+            --arg author "$ISSUE_AUTHOR" \
+            '{
+              channel: $channel,
+              text: "New issue opened in \($repo)",
+              blocks: [
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "*New Issue:* <\($url)|#\($num) \($title)>"
+                  }
+                },
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "*Author:* \($author)"
+                  }
+                }
+              ]
+            }')
+          echo "json=$PAYLOAD" >> "$GITHUB_OUTPUT"
+
       - name: Post to Slack
         uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # 2.1.1
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
-          payload: |
-            {
-              "channel": "C09HY5E0K60",
-              "text": "New issue opened in ${{ github.repository }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*New Issue:* <${{ github.event.issue.html_url }}|#${{ github.event.issue.number }} ${{ github.event.issue.title }}>"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Author:* ${{ github.event.issue.user.login }}"
-                  }
-                }
-              ]
-            }
+          payload: ${{ steps.payload.outputs.json }}
