@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.121
+
+- Added `updatedToolOutput` to `PostToolUseHookSpecificOutput` for replacing tool output on all tools. `updatedMCPToolOutput` is deprecated.
+
+## 0.2.120
+
+- Added `skills` option (`string[] | 'all'`) to control which Skills are loaded into the main session, matching the Python SDK
+
 ## 0.2.119
 
 - Added `forwardSubagentText` option to stream subagent text deltas to SDK consumers
