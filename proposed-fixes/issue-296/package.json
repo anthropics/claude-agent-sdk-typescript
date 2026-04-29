@@ -1,0 +1,17 @@
+{
+  "name": "issue-296-libc-aware-binary-discovery",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Reference implementation + tests for issue #296 (libc-aware Linux CLI binary discovery).",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}
