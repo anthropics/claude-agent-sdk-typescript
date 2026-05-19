@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.144
+
+- Assistant messages and `StopFailure` hooks now report `error: 'model_not_found'` when the selected model doesn't exist or isn't available, instead of the generic `'invalid_request'`. The `api_error_status` field on result messages is now documented.
+- Added `@anthropic-ai/claude-agent-sdk/extract` export for `bun build --compile` consumers: import the platform native binary with `with { type: 'file' }`, call `extractFromBunfs(binPath)` to copy it out of the compiled executable's virtual filesystem, and pass the result to `options.pathToClaudeCodeExecutable`
+
 ## 0.3.143
 
 - `@anthropic-ai/sdk` and `@modelcontextprotocol/sdk` are now `peerDependencies` instead of `dependencies`. Runtime is unaffected (both are bundled); npm/bun/pnpm auto-install them. yarn classic users should add them explicitly for full TypeScript type resolution
