@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.145
+
+- Updated to parity with Claude Code v2.1.145
+
 ## 0.3.144
 
 - Assistant messages and `StopFailure` hooks now report `error: 'model_not_found'` when the selected model doesn't exist or isn't available, instead of the generic `'invalid_request'`. The `api_error_status` field on result messages is now documented.
