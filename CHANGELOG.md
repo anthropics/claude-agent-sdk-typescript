@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.150
+
+- Updated to parity with Claude Code v2.1.150
+
 ## 0.3.149
 
 - Fixed `options.env` dropping `CLAUDE_AGENT_SDK_VERSION` (used for `User-Agent` and telemetry) when a custom environment is supplied, and corrected the `Options.env` docs to state that the value replaces the subprocess environment rather than merging with `process.env`
