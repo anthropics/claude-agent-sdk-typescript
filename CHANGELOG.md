@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.152
+
+- `SessionStart` hooks can now return `reloadSkills: true` to trigger a skill re-scan, and set the session title via `hookSpecificOutput.sessionTitle`
+- Added a `MessageDisplay` hook event that lets hooks transform or hide assistant message text as it is displayed
+
+## 0.3.151
+
+- Updated to parity with Claude Code v2.1.151
+
 ## 0.3.150
 
 - Updated to parity with Claude Code v2.1.150
