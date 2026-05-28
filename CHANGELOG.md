@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.153
+
+- Updated to parity with Claude Code v2.1.153
+
 ## 0.3.152
 
 - `SessionStart` hooks can now return `reloadSkills: true` to trigger a skill re-scan, and set the session title via `hookSpecificOutput.sessionTitle`
