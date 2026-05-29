@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.156
+
+- Updated to parity with Claude Code v2.1.156
+
+## 0.3.155
+
+- Updated to parity with Claude Code v2.1.155
+
 ## 0.3.154
 
 - Fixed stdio MCP servers being incorrectly restarted on every reconcile pass due to config-equality false positives
