@@ -123,9 +123,6 @@ through the relevant items below.
 
 - Size the `MongoClient` pool for expected concurrent sessions; don't share a
   pool with request-handler code that holds connections.
-- Use a write concern of at least `w: 1` (the driver default). If you tune to
-  `w: 0`, mirror writes are fire-and-forget and a server crash can lose
-  recently-appended entries — the conformance suite assumes durability.
 - Implement retention via a TTL index on `createdAt` or a scheduled
   `deleteMany` — the collection grows unbounded.
 
