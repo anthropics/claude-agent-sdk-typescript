@@ -350,7 +350,7 @@ pipeline and `distinct`, so the MongoDB conformance tests run **live-only**.
 They skip automatically unless `SESSION_STORE_MONGODB_URL` is set:
 
 ```bash
-docker run -d -p 27017:27017 mongo:7
+docker run -d -p 27017:27017 mongo:latest
 cd examples/session-stores/mongodb
 npm install
 SESSION_STORE_MONGODB_URL=mongodb://localhost:27017 \

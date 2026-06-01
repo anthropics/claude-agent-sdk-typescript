@@ -2,7 +2,7 @@
  * Live conformance suite against a real MongoDB server.
  * Skips automatically unless SESSION_STORE_MONGODB_URL is set.
  *
- *   docker run -d -p 27017:27017 mongo:7
+ *   docker run -d -p 27017:27017 mongo:latest
  *   SESSION_STORE_MONGODB_URL=mongodb://localhost:27017 \
  *     bun test test/conformance.live.test.ts
  */

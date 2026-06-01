@@ -4,7 +4,7 @@
  * Prereqs:
  *   - ANTHROPIC_API_KEY set
  *   - MongoDB reachable. For local testing:
- *       docker run -d -p 27017:27017 mongo:7
+ *       docker run -d -p 27017:27017 mongo:latest
  *
  * Run:
  *   SESSION_STORE_MONGODB_URL=mongodb://localhost:27017 \
