@@ -39,6 +39,7 @@
 
 ## 0.3.150
 
+- The `api_retry` system message now reports `error: 'overloaded'` for 529 responses, instead of `'rate_limit'` (which is now reserved for 429). Consumers that handled 529 via `error === 'rate_limit'` should also match `'overloaded'`, or switch to `error_status === 529`.
 - Updated to parity with Claude Code v2.1.150
 
 ## 0.3.149
