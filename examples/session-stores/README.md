@@ -3,8 +3,8 @@
 > **Reference implementations. Not published to npm, not maintained as production code.**
 
 Reference [`SessionStore`](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk)
-implementations for S3, Redis, and Postgres — copy the directory you need into
-your project, install the backend client, and wire it into
+implementations for S3, Redis, Postgres, and MongoDB — copy the directory you
+need into your project, install the backend client, and wire it into
 `query({ options: { sessionStore } })`.
 
 These adapters live under `examples/` so the SDK package stays free of
@@ -18,13 +18,14 @@ repository's CI. Each adapter passes the 13-contract conformance suite in
 | [`s3/`](s3/) | `@aws-sdk/client-s3` | in-process mock | env-gated (`SESSION_STORE_S3_*`) |
 | [`redis/`](redis/) | `ioredis` | in-process mock | env-gated (`SESSION_STORE_REDIS_URL`) |
 | [`postgres/`](postgres/) | `pg` | constructor only | env-gated (`SESSION_STORE_POSTGRES_URL`) |
+| [`mongodb/`](mongodb/) | `mongodb` | constructor only | env-gated (`SESSION_STORE_MONGODB_URL`) |
 
 ## Layout
 
 Each adapter is a self-contained package:
 
 ```
-{s3,redis,postgres}/
+{s3,redis,postgres,mongodb}/
   src/{Backend}SessionStore.ts   # the adapter — copy this into your project
   src/index.ts
   test/                          # unit + env-gated live conformance
@@ -50,8 +51,8 @@ SESSION_STORE_REDIS_URL=redis://localhost:6379/0 npm run test:live
 SESSION_STORE_REDIS_URL=redis://localhost:6379/0 npm run demo
 ```
 
-The S3 and Postgres directories follow the same pattern — see each `demo.ts`
-header for the corresponding `docker run` and env vars.
+The S3, Postgres, and MongoDB directories follow the same pattern — see each
+`demo.ts` header for the corresponding `docker run` and env vars.
 
 ## Validating your own adapter
 
@@ -117,6 +118,16 @@ through the relevant items below.
   entries), but don't byte-compare yourself.
 - Add a retention job (`DELETE WHERE created_at < ...`) — the table grows
   unbounded.
+
+### MongoDB
+
+- Size the `MongoClient` pool for expected concurrent sessions; don't share a
+  pool with request-handler code that holds connections.
+- Use a write concern of at least `w: 1` (the driver default). If you tune to
+  `w: 0`, mirror writes are fire-and-forget and a server crash can lose
+  recently-appended entries — the conformance suite assumes durability.
+- Implement retention via a TTL index on `createdAt` or a scheduled
+  `deleteMany` — the collection grows unbounded.
 
 ---
 
@@ -283,6 +294,70 @@ SESSION_STORE_POSTGRES_URL=postgresql://postgres:postgres@localhost:5432/postgre
 ```
 
 Each run creates a random-suffixed table and `DROP`s it on teardown.
+
+---
+
+## MongoDB — `mongodb/src/MongoDBSessionStore.ts`
+
+Backed by the official [`mongodb`](https://www.mongodb.com/docs/drivers/node/)
+Node driver.
+
+```typescript
+import { MongoClient } from 'mongodb'
+import { query } from '@anthropic-ai/claude-agent-sdk'
+import { MongoDBSessionStore } from './MongoDBSessionStore.js'
+
+const client = new MongoClient(process.env.MONGODB_URL!)
+await client.connect()
+const store = new MongoDBSessionStore({ client, dbName: 'claude' })
+await store.ensureSchema() // idempotent createIndexes
+
+for await (const message of query({
+  prompt: 'Hello!',
+  options: { sessionStore: store },
+})) {
+  if (message.type === 'result' && message.subtype === 'success') {
+    console.log(message.result)
+  }
+}
+```
+
+### Schema
+
+One document per transcript entry; the server-generated `_id` (an `ObjectId`)
+orders entries within a `(projectKey, sessionId, subpath)` key:
+
+```ts
+{
+  _id: ObjectId,
+  projectKey: string,
+  sessionId: string,
+  subpath: string | null,   // null = main transcript
+  entry: SessionStoreEntry, // opaque JSON
+  createdAt: Date,
+}
+```
+
+`ensureSchema()` creates two indexes — one covering `(projectKey, sessionId,
+subpath, _id)` for `load()`/`delete()`/`listSubkeys()`, and one covering
+`(projectKey, subpath, createdAt)` for `listSessions()`. `append()` is a
+single `insertMany`; `load()` is `find().sort({ _id: 1 })`.
+
+### Live MongoDB end-to-end
+
+There is no in-process MongoDB mock that faithfully exercises the aggregation
+pipeline and `distinct`, so the MongoDB conformance tests run **live-only**.
+They skip automatically unless `SESSION_STORE_MONGODB_URL` is set:
+
+```bash
+docker run -d -p 27017:27017 mongo:7
+cd examples/session-stores/mongodb
+npm install
+SESSION_STORE_MONGODB_URL=mongodb://localhost:27017 \
+  npm run test:live
+```
+
+Each run creates a random-suffixed collection and drops it on teardown.
 
 ---
 
