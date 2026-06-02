@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.160
+
+- Fixed SDK hook callbacks swallowing abort signals: aborting during a PostToolUse hook now ends the turn with a final `result` message instead of hanging the calling process
+
 ## 0.3.159
 
 - Updated to parity with Claude Code v2.1.159
