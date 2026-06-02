@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.161
+
+- The `initialize` control request is now idempotent: a second `initialize` returns the same success payload instead of an `Already initialized` error. `ControlResponse` gains an optional `pending_permission_requests` field, mirroring `ControlErrorResponse`
+- `applyFlagSettings` now live-applies `agent` changes: switching the active agent (or passing `null` to reset) takes effect on the next turn in a running session
+
 ## 0.3.160
 
 - Fixed SDK hook callbacks swallowing abort signals: aborting during a PostToolUse hook now ends the turn with a final `result` message instead of hanging the calling process
