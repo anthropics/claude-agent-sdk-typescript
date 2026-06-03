@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.162
+
+- Refusal error messages now carry `stop_reason: "refusal"` and `stop_details` on the assistant message and in session transcripts, so SDK consumers can detect refusals without text-matching the error content
+- Agent SDK sessions on native builds now default to fast embedded `find`/`grep` search in Bash, matching the interactive CLI, instead of always registering the dedicated Grep/Glob tools. To keep the dedicated tools (e.g. to intercept searches via `canUseTool` or hooks), name them in the `tools` option or reference them in `allowedTools`
+
 ## 0.3.161
 
 - The `initialize` control request is now idempotent: a second `initialize` returns the same success payload instead of an `Already initialized` error. `ControlResponse` gains an optional `pending_permission_requests` field, mirroring `ControlErrorResponse`
