@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.163
+
+- `stop_task` control requests now return success when the target task is already gone (`not_found` or `not_running`), so SDK clients can reliably prune stale task chips
+- Fixed SDK hosts being unable to add builtin MCP servers (e.g. `claude-in-chrome`) via `setMcpServers` when the CLI was launched without them
+- Stop and SubagentStop hook events now support `additionalContext` in `hookSpecificOutput`, enabling non-error feedback that continues the turn
+
 ## 0.3.162
 
 - Refusal error messages now carry `stop_reason: "refusal"` and `stop_details` on the assistant message and in session transcripts, so SDK consumers can detect refusals without text-matching the error content
