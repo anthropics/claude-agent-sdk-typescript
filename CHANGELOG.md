@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.165
+
+- Updated to parity with Claude Code v2.1.165
+
+## 0.3.164
+
+- Updated to parity with Claude Code v2.1.164
+
 ## 0.3.163
 
 - `stop_task` control requests now return success when the target task is already gone (`not_found` or `not_running`), so SDK clients can reliably prune stale task chips
