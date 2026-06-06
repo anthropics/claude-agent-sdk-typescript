@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.167
+
+- Updated to parity with Claude Code v2.1.167
+
 ## 0.3.166
 
 - Fixed MCP resource tools not being injected for servers added at runtime via the `mcp_set_servers` control request
