@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.169
+
+- Added an experimental `usage_EXPERIMENTAL_MAY_CHANGE_DO_NOT_RELY_ON_THIS_API_YET()` method on `Query` returning structured session cost, plan rate-limit, and local usage-behaviors data
+- Added an `sse` option (`SSEOptions`) to `BrowserQueryOptions` as an alternative to `websocket`, for browser SDK consumers who prefer Server-Sent Events
+
 ## 0.3.168
 
 - Updated to parity with Claude Code v2.1.168
