@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.170
+
+- Added claude-fable-5 model and the fable alias to SDK model types. https://www.anthropic.com/news/claude-fable-5-mythos-5
+- Updated to parity with Claude Code v2.1.170
+
 ## 0.3.169
 
 - Added an experimental `usage_EXPERIMENTAL_MAY_CHANGE_DO_NOT_RELY_ON_THIS_API_YET()` method on `Query` returning structured session cost, plan rate-limit, and local usage-behaviors data
