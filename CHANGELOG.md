@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.172
+
+- SDK `plugins` option now accepts `skipMcpDiscovery: true` per plugin, so a host that manages a plugin's MCP connections itself can load skills/hooks from the plugin path without the engine re-reading its `.mcp.json`
+- Fixed slash-followed-by-whitespace input (e.g. `/ add tests`) being silently dropped instead of treated as a plain prompt
+
+## 0.3.171
+
+- Updated to parity with Claude Code v2.1.171
+
 ## 0.3.170
 
 - Added claude-fable-5 model and the fable alias to SDK model types. https://www.anthropic.com/news/claude-fable-5-mythos-5
