@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.173
+
+- Updated to parity with Claude Code v2.1.173
+
 ## 0.3.172
 
 - SDK `plugins` option now accepts `skipMcpDiscovery: true` per plugin, so a host that manages a plugin's MCP connections itself can load skills/hooks from the plugin path without the engine re-reading its `.mcp.json`
