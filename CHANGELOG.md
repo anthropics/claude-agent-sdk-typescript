@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.176
+
+- Fixed turn `result` messages being dropped when multiple turns complete while a background agent or workflow is running
+- Fixed background agent, remote agent, and MCP task state not being restored when resuming a session via the SDK
+
 ## 0.3.175
 
 - Updated to parity with Claude Code v2.1.175
