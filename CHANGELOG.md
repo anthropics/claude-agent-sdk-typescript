@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.174
+
+- SDK consumers now receive the `system/model_fallback` message for all fallback triggers — `overloaded`, `server_error`, and `last_resort` in addition to `model_not_found` and `permission_denied` — and the message's `trigger` field gained the `server_error` and `last_resort` values
+
 ## 0.3.173
 
 - Updated to parity with Claude Code v2.1.173
