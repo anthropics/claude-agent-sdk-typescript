@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.177
+
+- Updated to parity with Claude Code v2.1.177
+
 ## 0.3.176
 
 - Fixed turn `result` messages being dropped when multiple turns complete while a background agent or workflow is running
