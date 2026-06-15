@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.178
+
+- Spawn failures on an existing native binary now explain the likely libc mismatch (musl binary on a glibc host) and suggest `options.pathToClaudeCodeExecutable`
+- Permission-denied advisory messages now carry typed denial reasons (`safetyCheck`, `asyncAgent`), enabling SDK consumers to programmatically match denial causes
+- Fixed `UserPromptSubmit` hook block feedback not being emitted to the SDK event stream — consumers can now see why a prompt was blocked by a hook instead of a silent hang
+- Remote Control workers now send a `worker_shutting_down` system message on graceful exit so remote clients can show why the session ended
+- Fixed MCP server-level specs (`mcp__server`, `mcp__server__*`) in `disallowedTools` being silently ignored — they now correctly remove all tools from the named server
+
 ## 0.3.177
 
 - Updated to parity with Claude Code v2.1.177
