@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.179
+
+- Added optional `tool_use_meta` sidecar to assistant messages with display-friendly names for tool calls, so SDK consumers can render human-readable labels instead of raw wire names
+- Fixed `-p` mode exiting before a completed background agent's notification was delivered, causing interim text to ship as the final result
+- Fixed remote (stream-json) sessions appearing busy for the entire duration of a background workflow — the turn result is now emitted at the turn boundary and the session reports idle while background tasks continue
+
 ## 0.3.178
 
 - Spawn failures on an existing native binary now explain the likely libc mismatch (musl binary on a glibc host) and suggest `options.pathToClaudeCodeExecutable`
