@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.181
+
+- Added `errorCode`, `canUserPurchaseCredits`, and `hasChargeableSavedPaymentMethod` fields to `SDKRateLimitInfo` for detecting credits-required rate limits
+- Added `tool_use_meta.icon_url` to assistant messages, populated from MCP server directory metadata
+- Fixed SDK-hosted Remote Control sessions dropping `file_attachments` from inbound user messages
+
+## 0.3.180
+
+- Updated to parity with Claude Code v2.1.180
+
 ## 0.3.179
 
 - Added optional `tool_use_meta` sidecar to assistant messages with display-friendly names for tool calls, so SDK consumers can render human-readable labels instead of raw wire names
