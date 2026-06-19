@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.183
+
+- Updated to parity with Claude Code v2.1.183
+
+## 0.3.182
+
+- Updated to parity with Claude Code v2.1.182
+
 ## 0.3.181
 
 - Added `errorCode`, `canUserPurchaseCredits`, and `hasChargeableSavedPaymentMethod` fields to `SDKRateLimitInfo` for detecting credits-required rate limits
