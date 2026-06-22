@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.186
+
+- Added `agent_id` field to `can_use_tool` control requests — background agents now forward permission prompts to `canUseTool` instead of auto-denying, and stdin stays open while background tasks are running
+- Added `ReadMcpResourceDirTool` tool type to SDK schemas — MCP resource directory listing is now a dedicated tool instead of a fallback inside `ReadMcpResourceTool`
+- Added `rewind_conversation` control request for rewinding a conversation to a previous point with durable resume anchor support
+
 ## 0.3.185
 
 - Updated to parity with Claude Code v2.1.185
