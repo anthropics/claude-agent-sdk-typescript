@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.187
+
+- Added `sandbox.credentials` to SDK settings types for configuring credential file and environment variable denial in sandboxed commands
+
 ## 0.3.186
 
 - Added `agent_id` field to `can_use_tool` control requests — background agents now forward permission prompts to `canUseTool` instead of auto-denying, and stdin stays open while background tasks are running
