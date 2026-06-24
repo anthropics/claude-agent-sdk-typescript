@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.190
+
+- Updated to parity with Claude Code v2.1.190
+
+## 0.3.188
+
+- Updated to parity with Claude Code v2.1.188
+
 ## 0.3.187
 
 - Added `sandbox.credentials` to SDK settings types for configuring credential file and environment variable denial in sandboxed commands
