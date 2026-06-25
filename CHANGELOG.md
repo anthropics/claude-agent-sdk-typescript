@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.193
+
+- Added `promptSuggestions` option to Browser SDK `query()` to opt the remote CLI into emitting follow-up suggestions
+- Fixed brief console window flashes on Windows when spawning CLI subprocesses
+
+## 0.3.192
+
+- Updated to parity with Claude Code v2.1.192
+
 ## 0.3.191
 
 - Added `old_source` field to `NotebookEdit` tool results for `replace` and `delete` operations, enabling inline diffs
