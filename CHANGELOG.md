@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.195
+
+- Added `Query.reinitialize()` to re-send the initialize control request and redeliver pending permission/dialog prompts after a transport gap
+- Fixed `commands_changed` event not being emitted for synced skills when the skill list resolves before the change-detector subscribes
+
+## 0.3.194
+
+- Updated to parity with Claude Code v2.1.194
+
 ## 0.3.193
 
 - Added `promptSuggestions` option to Browser SDK `query()` to opt the remote CLI into emitting follow-up suggestions
