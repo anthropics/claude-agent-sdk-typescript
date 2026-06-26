@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tgz
+.env
+.env.*
+bun.lock
+package-lock.json
