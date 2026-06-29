@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.196
+
+- Added `prompt_id` field to hook input payloads for correlating hook events with OpenTelemetry prompt-level events
+- Fixed control protocol deduplication dropping tool-use IDs after 1000 resolutions, which could cause duplicate `tool_result` deliveries in long-running sessions
+
 ## 0.3.195
 
 - Added `Query.reinitialize()` to re-send the initialize control request and redeliver pending permission/dialog prompts after a transport gap
