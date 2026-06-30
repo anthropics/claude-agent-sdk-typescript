@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.197
+
+- Updated to parity with Claude Code v2.1.197
+
 ## 0.3.196
 
 - Added `prompt_id` field to hook input payloads for correlating hook events with OpenTelemetry prompt-level events
