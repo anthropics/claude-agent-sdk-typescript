@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.198
+
+- Added a runtime warning when `canUseTool` is configured alongside `allowedTools` or `bypassPermissions`, which shadow the callback
+- Added per-server `request_timeout_ms` option to `mcp_set_servers` control request
+- Fixed `SDKUserMessage.isSynthetic` not being mapped to `isMeta` on ingestion, which could cause synthetic messages to be treated as real user messages
+- Fixed workflow progress events silently dropping earliest agents from the list while the phase counter remained correct
+
 ## 0.3.197
 
 - Updated to parity with Claude Code v2.1.197
