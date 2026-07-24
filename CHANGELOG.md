@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.219
+
+- Added opt-in `cancel_queued` to the interrupt control request (capability `interrupt_cancel_queued_v1`): cancels queued and pending-dispatch messages alongside the abort
+- Added `fast_mode_disabled_reason` to result and init messages so SDK hosts can explain why fast mode is off
+- Added `DirectoryAdded` lifecycle hook event to the control protocol, fired when a new working directory is registered mid-session
+- Fixed the initialize response reporting `fast_mode_state` from the spawn-time model after a model switch
+- Added `sandbox.network.strictAllowlist` to SDK settings types for deterministically denying non-allowlisted hosts in sandboxed commands
+- Added `workflowSizeGuideline` to SDK settings types for setting the advisory dynamic-workflow size guideline
+
 ## 0.3.218
 
 - `SkillToolOutput` now reports `background: true` when a forked skill was dispatched as a detached background agent
