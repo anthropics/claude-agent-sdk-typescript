@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.220
+
+- Updated to parity with Claude Code v2.1.220
+
 ## 0.3.219
 
 - Added opt-in `cancel_queued` to the interrupt control request (capability `interrupt_cancel_queued_v1`): cancels queued and pending-dispatch messages alongside the abort
