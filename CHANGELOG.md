@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.221
+
+- Improved `skills` option validation: malformed names (delimiters or control characters) and wildcard-form names are rejected with a clear error; use `skills: 'all'` to enable every skill
+- Fixed external MCP servers passed via the `mcpServers` option not being connected before the first turn, which caused the model to emit tool calls as literal text
+
 ## 0.3.220
 
 - Updated to parity with Claude Code v2.1.220
