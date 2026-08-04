@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.222
+
+- Fixed `query({ sessionStore, resume })` not carrying user `settings.json` (`apiKeyHelper`, `env`, `hooks`, `permissions`) into the resumed subprocess
+
 ## 0.3.221
 
 - Improved `skills` option validation: malformed names (delimiters or control characters) and wildcard-form names are rejected with a clear error; use `skills: 'all'` to enable every skill
