@@ -8,10 +8,12 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test test/PostgresSessionStore.test.ts",
     "test:live": "bun test test/conformance.live.test.ts",
-    "demo": "bun run demo.ts"
+    "demo": "bun run demo.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "latest",
+    "patch-package": "^8.0.1",
     "pg": "^8.13.0"
   },
   "devDependencies": {
