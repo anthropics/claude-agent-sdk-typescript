@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.223
+
+- Added `resumeDropsTurn` option: with `resumeSessionAt`, declares the turn a truncating resume intends to drop; the CLI refuses the resume if anything else would be discarded
+- Result messages for repeated 529 overload failures now include `api_error_status: 529`, so SDK consumers can detect overload terminations structurally instead of matching message text
+- Bare headless (`-p` / SDK `query()` without `canUseTool`) now emits `system/permission_denied` stream events when a tool call is auto-denied
+- Documented `usage` vs `modelUsage` on stream-json results: `usage` is main-loop-only and per-turn; `modelUsage` is cumulative, covers all query-pipeline calls, and is the field for cost accounting
+
 ## 0.3.222
 
 - Fixed `query({ sessionStore, resume })` not carrying user `settings.json` (`apiKeyHelper`, `env`, `hooks`, `permissions`) into the resumed subprocess
