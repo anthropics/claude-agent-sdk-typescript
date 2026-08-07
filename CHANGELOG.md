@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.224
+
+- Added `crossSessionInbound` and `dialogExpiry` settings: cross-session messages sent to a session running with bypassed permissions are held for your approval, and messages to other sessions auto-deliver
+- Added `subkind: 'peer-send-message'` to the `task-notification` member of `SDKMessageOrigin`, marking a notification raised by a cross-session `SendMessage`
+- Added `source: 'archive'` plugin config variant to `Settings`, with `url` and optional `sha256`, for installing plugins from a zip over HTTPS
+- Added sandbox credential-masking fields to `Settings`: `decode: 'jwt'` with `maskClaims`, `extract`/`onExtractNoMatch` on `envVars`, and `awsPairs`/`sigv4` for AWS SigV4 re-signing
+- Fixed long (>200 char) project paths resolving to another project's session directory under a shared sanitized prefix; session list/get/rename/tag/fork/delete and `/resume` no longer cross projects
+
 ## 0.3.223
 
 - Added `resumeDropsTurn` option: with `resumeSessionAt`, declares the turn a truncating resume intends to drop; the CLI refuses the resume if anything else would be discarded
