@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.226
+
+- Updated to parity with Claude Code v2.1.226
+
 ## 0.3.225
 
 - Fixed background subagents in headless/SDK sessions never resuming when a background shell command or Monitor they left running completed, so the subagent never saw the result
