@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.228
+
+- Agent tool results (`AgentOutput`): `usage.output_tokens_details` is now carried through
+
 ## 0.3.227
 
 - Updated to parity with Claude Code v2.1.227
