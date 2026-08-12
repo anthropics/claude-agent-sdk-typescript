@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.229
+
+- Added `terminal_slash_commands` to the system init message so Remote Control clients can hide terminal-oriented commands
+- Changed conversations whose messages alone exceed the API's 32 MB limit to end the turn with `terminal_reason` `"api_error"` instead of `"image_error"`; `StopFailure` `error_details` is `"request_body_over_limit: …"`
+
 ## 0.3.228
 
 - Agent tool results (`AgentOutput`): `usage.output_tokens_details` is now carried through
