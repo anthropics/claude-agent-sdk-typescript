@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.231
+
+- Updated to parity with Claude Code v2.1.231
+
+## 0.3.230
+
+- Updated to parity with Claude Code v2.1.230
+
 ## 0.3.229
 
 - Added `terminal_slash_commands` to the system init message so Remote Control clients can hide terminal-oriented commands
