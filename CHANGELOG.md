@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.233
+
+- Notification hooks now fire for pending permission prompts on the SDK path, matching the interactive REPL behavior
+- Todo/task-tracking tools (`TaskCreate`/`TaskGet`/`TaskUpdate`/`TaskList`, `TodoWrite`) are no longer in the default tool surface on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models; name them in the `tools` option or reference them in `allowedTools` (or set `CLAUDE_CODE_ENABLE_TODO_TOOLS=1`) to keep them
+
 ## 0.3.232
 
 - Subagent MCP `tool_result` frames whose result carries `_meta` now emit `tool_use_result` as `{ content, _meta }` (matching main-loop frames) instead of a bare value
