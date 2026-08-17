@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.234
+
+- Removed unused `bypass_permissions_disabled` from `ExitReason` type; the value was never emitted — TypeScript consumers with an explicit `case` branch get a compile error on upgrade (runtime unaffected)
+- Updated the `ApiKeySource` type to include the values `system/init` actually reports (`ANTHROPIC_API_KEY`, `apiKeyHelper`, `/login managed key`, `none`)
+- `vcs_state_changed` events report the directory the shell finished in (an inner `cd` is reflected)
+- A peer `origin` injected by the host may declare the sending session's permission class (`fromMode`) so a same-class message is delivered to a recipient that runs without asking
+- `SDKSystemMessage` (`system`/`init`) gains an optional `effort` field: the session's applied effort level, or `null` when none is sent. Set on Remote Control bridge init frames
+
 ## 0.3.233
 
 - Notification hooks now fire for pending permission prompts on the SDK path, matching the interactive REPL behavior
