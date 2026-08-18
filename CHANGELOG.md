@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.235
+
+- Updated to parity with Claude Code v2.1.235
+
 ## 0.3.234
 
 - Removed unused `bypass_permissions_disabled` from `ExitReason` type; the value was never emitted — TypeScript consumers with an explicit `case` branch get a compile error on upgrade (runtime unaffected)
