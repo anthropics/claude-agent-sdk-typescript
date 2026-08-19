@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.236
+
+- `PostToolUse` hooks can return `hookSpecificOutput.classifierContext`, a short host-asserted note about a tool call's result that the auto mode permission classifier reads alongside that result
+
 ## 0.3.235
 
 - Updated to parity with Claude Code v2.1.235
