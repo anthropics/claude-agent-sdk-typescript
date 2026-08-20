@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.238
+
+- Added `is_backgrounded` and `spawn_depth` to `task_started` events for subagent tasks (`is_backgrounded` also on background Bash tasks)
+- Added `suppressOriginalPrompt` to `UserPromptExpansion` hook output, matching `UserPromptSubmit`
+- Added `command_lifecycle` state `refused`: a cross-session peer message the session's receive-side policy declines now reports this terminal state instead of producing no lifecycle frames
+- Fixed SDK hook callbacks silently not applying after a host re-sends `initialize` to an already-running CLI; the response now reports `hooks_applied`
+- Fixed `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=true` not keeping `prompt_suggestion` messages on when the account is near, but not over, its usage limit
+- Changed `vcs_state_changed` push events to emit one event per pushed branch
+
 ## 0.3.237
 
 - Updated to parity with Claude Code v2.1.237
