@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.239
+
+- `total_cost_usd` / `modelUsage.costUSD` now include the 1.1× US-only-inference (data residency) multiplier when the response reports `inference_geo: "us"`
+- A result held back for background subagents in one-shot mode now reports `total_cost_usd`, `duration_api_ms` and `modelUsage` as of its release, not the turn-end snapshot
+- Fixed `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` in an array `systemPrompt` being sent to the model as literal text on Bedrock, Vertex, Foundry, and gateway providers
+- A repeated `initialize` on a running process is now followed by a `background_tasks_changed` snapshot of the live background tasks, so reconnecting hosts see work that is still running
+
 ## 0.3.238
 
 - Added `is_backgrounded` and `spawn_depth` to `task_started` events for subagent tasks (`is_backgrounded` also on background Bash tasks)
