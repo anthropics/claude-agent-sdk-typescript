@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.240
+
+- Updated to parity with Claude Code v2.1.240
+
 ## 0.3.239
 
 - `total_cost_usd` / `modelUsage.costUSD` now include the 1.1× US-only-inference (data residency) multiplier when the response reports `inference_geo: "us"`
