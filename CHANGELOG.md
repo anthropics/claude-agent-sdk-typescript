@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.246
+
+- Added optional `user_message_uuid` to error result messages and to the first assistant message or `stream_event` of each turn, linking a reply or failure to the user message that triggered it
+- Added `modelUsage[*].costBasis` (`'list' | 'managed' | 'unknown'`) reporting which price table each model's `costUSD` was computed from
+- Added `modelPricing` support in the `managedSettings` option for hosts that set `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`; an admin-managed settings source that sets `modelPricing` still wins
+- Added `perTaskStopAffordance` option: when set, `interrupt()` aborts only the current turn and keeps background agents and workflows running; otherwise (and for one-shot string prompts) they stop
+
 ## 0.3.245
 
 - Updated to parity with Claude Code v2.1.245
