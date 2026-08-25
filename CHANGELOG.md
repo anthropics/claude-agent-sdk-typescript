@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.245
+
+- Updated to parity with Claude Code v2.1.245
+
+## 0.3.244
+
+- Updated to parity with Claude Code v2.1.244
+
+## 0.3.243
+
+- Added optional `queued_turn_count` to result messages: the number of queued user sends still pending when the result was produced, so hosts know whether another turn and result will follow
+- Fixed `mcp_status` reporting a remote MCP server as connected after its connection dropped; it now reports pending while reconnecting, then connected or failed
+- Fixed managed `disableAllHooks` also disabling hook callbacks registered through the `hooks` option; they now keep running, matching `allowManagedHooksOnly`
+- Changed Read tool PDF results: the `document` block (or page `image` blocks for `pages` reads) now arrives inside the `tool_result` content instead of as a separate `user` message after it
+- Updated to parity with Claude Code v2.1.243
+
+## 0.3.242
+
+- Updated to parity with Claude Code v2.1.242
+
 ## 0.3.241
 
 - Updated to parity with Claude Code v2.1.241
