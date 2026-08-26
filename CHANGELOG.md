@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.247
+
+- Added an optional `ambient` flag to `task_started`, `task_notification` and `background_tasks_changed` task entries so hosts can exclude housekeeping tasks from activity indicators
+- Fixed the `permissionMode` on per-turn `system/init` frames reporting the mode at turn start instead of the live mode, so a mode switch right after submitting no longer sends a stale value
+
 ## 0.3.246
 
 - Added optional `user_message_uuid` to error result messages and to the first assistant message or `stream_event` of each turn, linking a reply or failure to the user message that triggered it
