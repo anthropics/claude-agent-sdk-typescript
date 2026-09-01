@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.258
+
+- Updated to parity with Claude Code v2.1.258
+
 ## 0.3.257
 
 - Added `thinkingTokens` to `ModelUsage` (a subset of `outputTokens`), and fixed result-message `usage.output_tokens_details.thinking_tokens` reporting 0 instead of the session's real count
