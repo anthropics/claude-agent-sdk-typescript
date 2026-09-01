@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.3.257
+
+- Added `thinkingTokens` to `ModelUsage` (a subset of `outputTokens`), and fixed result-message `usage.output_tokens_details.thinking_tokens` reporting 0 instead of the session's real count
+- Added `tool_use_result.resourceLinks` on user messages carrying MCP tool results: the `resource_link` blocks the tool returned, so hosts can render returned files without parsing the result text
+- Added optional `resource_links` to `task_notification` for an auto-backgrounded MCP tool call that completed, listing the files it returned by reference; join to the call via `tool_use_id`
+- Fixed `mcp_reconnect` and `mcp_toggle` acting on a same-named `.mcp.json` / `~/.claude.json` server instead of the `--mcp-config` or `mcp_set_servers` one
+- Fixed `mcp_toggle` disable also removing the tools of a sibling MCP server whose name extends the disabled one's (disabling `foo` dropped `foo__bar`'s tools)
+- Changed `mcp_set_servers` to also list a server whose connection attempt throws under `added` (with a `failed` row in `mcp_status`), not only under `errors`
+- Changed Agent tool calls to emit the periodic `tool_progress` heartbeat (`heartbeat: true`) like other long tools; heartbeat frames never clear a `subagent_retry` indicator
+- Fixed the browser SDK bundle (`@anthropic-ai/claude-agent-sdk/browser`) never streaming any messages on engines without native `Symbol.dispose` (Safari/iOS, Firefox ESR, older Chromium)
+- Fixed a background Bash task that is still running when a stream-json session ends right after an interrupt (stdin closed) never receiving its final `task_notification`
+- Fixed `-p` giving up on a long-running background subagent without actually stopping it, so `background_tasks_changed` kept listing it and events for it arrived after its `stopped` notification
+- Added `detail` option to `Query.getContextUsage()`: `'summary'` answers from the last response's usage and local estimates without per-category token-count API calls (default `'full'`)
+- Updated to parity with Claude Code v2.1.257
+
+## 0.3.256
+
+- Updated to parity with Claude Code v2.1.256
+
+## 0.3.255
+
+- Updated to parity with Claude Code v2.1.255
+
+## 0.3.254
+
+- Updated to parity with Claude Code v2.1.254
+
+## 0.3.253
+
+- Updated to parity with Claude Code v2.1.253
+
 ## 0.3.252
 
 - Updated to parity with Claude Code v2.1.252
