@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.259
+
+- Added `user_message_uuids` beside `user_message_uuid` on a turn's first reply frame and result: every user message the turn answered, so a reply to several merged messages can be matched to each
+- Added `permissionPrompts: 'none'` option to auto-deny permission prompts in sessions with nobody to answer them, without disabling auto mode's classifier
+- Updated to parity with Claude Code v2.1.259
+
 ## 0.3.258
 
 - Updated to parity with Claude Code v2.1.258
