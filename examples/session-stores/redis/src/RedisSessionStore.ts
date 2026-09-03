@@ -17,6 +17,32 @@ const SUBKEYS = '__subkeys'
 /** Reserved sessionId sentinel for the per-project session index. */
 const SESSIONS = '__sessions'
 
+const APPEND_SCRIPT = `
+local entry_type = redis.call('TYPE', KEYS[1]).ok
+local index_type = redis.call('TYPE', KEYS[2]).ok
+if entry_type ~= 'none' and entry_type ~= 'list' then
+  return redis.error_reply('WRONGTYPE transcript key must hold a list')
+end
+if index_type ~= 'none' and index_type ~= ARGV[1] then
+  return redis.error_reply('WRONGTYPE index key must hold a ' .. ARGV[1])
+end
+local first_entry = ARGV[1] == 'set' and 3 or 4
+local length = redis.call('RPUSH', KEYS[1], unpack(ARGV, first_entry))
+if ARGV[1] == 'set' then
+  redis.call('SADD', KEYS[2], ARGV[2])
+else
+  redis.call('ZADD', KEYS[2], ARGV[2], ARGV[3])
+end
+return length
+`
+
+function throwTransactionError(
+  results: [error: Error | null, result: unknown][] | null,
+): void {
+  const error = results?.find(([commandError]) => commandError)?.[0]
+  if (error) throw error
+}
+
 /**
  * Redis-backed SessionStore.
  *
@@ -62,17 +88,21 @@ export class RedisSessionStore implements SessionStore {
 
   async append(key: SessionKey, entries: SessionStoreEntry[]): Promise<void> {
     if (entries.length === 0) return
-    const pipe = this.client.multi()
-    pipe.rpush(this.entryKey(key), ...entries.map(e => JSON.stringify(e)))
-    if (key.subpath) {
-      pipe.sadd(this.subkeysKey(key), key.subpath)
-    } else {
-      // Only main-transcript appends bump the session index — matches
-      // InMemorySessionStore.listSessions()'s "no subpath" filter and the S3
-      // adapter's main-parts-only mtime derivation.
-      pipe.zadd(this.sessionsKey(key.projectKey), Date.now(), key.sessionId)
-    }
-    await pipe.exec()
+    const indexKey = key.subpath
+      ? this.subkeysKey(key)
+      : this.sessionsKey(key.projectKey)
+    const indexArgs = key.subpath
+      ? ['set', key.subpath]
+      : ['zset', Date.now(), key.sessionId]
+
+    await this.client.eval(
+      APPEND_SCRIPT,
+      2,
+      this.entryKey(key),
+      indexKey,
+      ...indexArgs,
+      ...entries.map(e => JSON.stringify(e)),
+    )
   }
 
   async load(key: SessionKey): Promise<SessionStoreEntry[] | null> {
@@ -108,11 +138,13 @@ export class RedisSessionStore implements SessionStore {
   async delete(key: SessionKey): Promise<void> {
     if (key.subpath !== undefined) {
       // Targeted: remove just this subpath list and its index entry.
-      await this.client
-        .multi()
-        .del(this.entryKey(key))
-        .srem(this.subkeysKey(key), key.subpath)
-        .exec()
+      throwTransactionError(
+        await this.client
+          .multi()
+          .del(this.entryKey(key))
+          .srem(this.subkeysKey(key), key.subpath)
+          .exec(),
+      )
       return
     }
     // Cascade: main list + every subpath list + subkey set + session-index entry.
@@ -123,11 +155,13 @@ export class RedisSessionStore implements SessionStore {
       subkeysKey,
       ...subpaths.map(sp => this.entryKey({ ...key, subpath: sp })),
     ]
-    await this.client
-      .multi()
-      .del(...toDelete)
-      .zrem(this.sessionsKey(key.projectKey), key.sessionId)
-      .exec()
+    throwTransactionError(
+      await this.client
+        .multi()
+        .del(...toDelete)
+        .zrem(this.sessionsKey(key.projectKey), key.sessionId)
+        .exec(),
+    )
   }
 
   async listSubkeys(key: {

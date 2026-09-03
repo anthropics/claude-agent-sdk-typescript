@@ -5,7 +5,7 @@ import { runSessionStoreConformance } from '../../shared/conformance.ts'
 
 /**
  * Minimal in-process ioredis mock backing the subset of commands the adapter
- * uses: rpush/lrange, sadd/srem/smembers, zadd/zrange/zrem, del, multi.
+ * uses: rpush/lrange, sadd/srem/smembers, zadd/zrange/zrem, del, eval, multi.
  * `multi()` executes eagerly (no isolation needed for single-threaded tests).
  */
 function makeMockRedis(): Redis {
@@ -78,6 +78,26 @@ function makeMockRedis(): Redis {
         if (zsets.delete(k)) n++
       }
       return n
+    },
+    async eval(
+      _script: string,
+      _numberOfKeys: number,
+      entryKey: string,
+      indexKey: string,
+      indexType: 'set' | 'zset',
+      ...args: Array<string | number>
+    ) {
+      const indexArgCount = indexType === 'set' ? 1 : 2
+      const length = await api.rpush(
+        entryKey,
+        ...args.slice(indexArgCount).map(String),
+      )
+      if (indexType === 'set') {
+        await api.sadd(indexKey, String(args[0]))
+      } else {
+        await api.zadd(indexKey, Number(args[0]), String(args[1]))
+      }
+      return length
     },
     async keys(pattern: string) {
       const all = new Set([...lists.keys(), ...sets.keys(), ...zsets.keys()])
