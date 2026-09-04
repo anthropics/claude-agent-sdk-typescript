@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.261
+
+- Added `pluginDelivery: 'initialize'` to send `plugins` over stdin so the launch command line no longer grows with the plugin count (fixes Windows start failures with many plugins)
+- Fixed `query()` throwing "Object not disposable" in runtimes without a native `Symbol.dispose`, such as Node ≤22 `vm` contexts (Jest's `node` environment, vitest `vmThreads`/`vmForks`) and Node <18.18
+- Updated to parity with Claude Code v2.1.261
+
 ## 0.3.260
 
 - Added optional `user_message_uuid` to `thinking_tokens` system messages, linking thinking progress to the user message that triggered the turn
