@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.270
+
+- Updated to parity with Claude Code v2.1.270
+
 ## 0.3.269
 
 - Changed `user_message_uuid`, `user_message_uuids` and `resume_reason` to be stamped on a turn's first complete assistant message as well as its first stream event when partial messages are on
