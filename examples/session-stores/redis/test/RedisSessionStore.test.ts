@@ -5,8 +5,7 @@ import { runSessionStoreConformance } from '../../shared/conformance.ts'
 
 /**
  * Minimal in-process ioredis mock backing the subset of commands the adapter
- * uses: rpush/lrange, sadd/srem/smembers, zadd/zrange/zrem, del, multi.
- * `multi()` executes eagerly (no isolation needed for single-threaded tests).
+ * uses: rpush/lrange, sadd/srem/smembers, zadd/zrange/zrem, del, eval.
  */
 function makeMockRedis(): Redis {
   const lists = new Map<string, string[]>()
@@ -79,6 +78,47 @@ function makeMockRedis(): Redis {
       }
       return n
     },
+    async eval(
+      script: string,
+      numberOfKeys: number,
+      ...rawArgs: Array<string | number>
+    ) {
+      const keys = rawArgs.slice(0, numberOfKeys).map(String)
+      const args = rawArgs.slice(numberOfKeys)
+      if (script.includes('-- append')) {
+        const [entryKey, indexKey] = keys as [string, string]
+        const indexType = String(args[0])
+        const indexArgCount = indexType === 'set' ? 2 : 3
+        const length = await api.rpush(
+          entryKey,
+          ...args.slice(indexArgCount).map(String),
+        )
+        if (indexType === 'set') {
+          await api.sadd(indexKey, String(args[1]))
+        } else {
+          await api.zadd(indexKey, Number(args[1]), String(args[2]))
+        }
+        return length
+      }
+      if (script.includes('-- delete-subpath')) {
+        await api.del(keys[0]!)
+        await api.srem(keys[1]!, String(args[0]))
+        return 1
+      }
+      const [entryKey, subkeysKey, sessionsKey] = keys as [
+        string,
+        string,
+        string,
+      ]
+      const subpaths = await api.smembers(subkeysKey)
+      await api.del(
+        entryKey,
+        subkeysKey,
+        ...subpaths.map(subpath => `${entryKey}:${subpath}`),
+      )
+      await api.zrem(sessionsKey, String(args[0]))
+      return 1
+    },
     async keys(pattern: string) {
       const all = new Set([...lists.keys(), ...sets.keys(), ...zsets.keys()])
       if (pattern === '*') return [...all]
@@ -86,32 +126,6 @@ function makeMockRedis(): Redis {
         '^' + pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*') + '$',
       )
       return [...all].filter(k => re.test(k))
-    },
-    multi() {
-      const queue: Array<() => Promise<unknown>> = []
-      const chain: Record<string, unknown> = {
-        async exec() {
-          const out: Array<[null, unknown]> = []
-          for (const fn of queue) out.push([null, await fn()])
-          return out
-        },
-      }
-      for (const cmd of [
-        'rpush',
-        'sadd',
-        'srem',
-        'zadd',
-        'zrem',
-        'del',
-      ] as const) {
-        chain[cmd] = (...args: unknown[]) => {
-          queue.push(() =>
-            (api[cmd] as (...a: unknown[]) => Promise<unknown>)(...args),
-          )
-          return chain
-        }
-      }
-      return chain
     },
   }
   return api as unknown as Redis
