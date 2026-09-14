@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.271
+
+- Added optional `omitClaudeMd` to `AgentDefinition` in the `agents` option, so a subagent can run without user, project and local CLAUDE.md files; managed policy files still load
+- Fixed `listSessions`, `getSessionMessages` and `getSessionInfo` with `dir` on Windows not finding sessions for a directory on a mapped network drive or SUBST drive
+- Fixed `sessionStore` resume losing the global config when it is stored under the legacy `.config.json` name or an OAuth-suffixed file name
+- Removed `persistent` from the `MonitorInput` tool type
+- Updated to parity with Claude Code v2.1.271
+
 ## 0.3.270
 
 - Updated to parity with Claude Code v2.1.270
