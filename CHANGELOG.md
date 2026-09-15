@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.272
+
+- Updated to parity with Claude Code v2.1.272
+
 ## 0.3.271
 
 - Added optional `omitClaudeMd` to `AgentDefinition` in the `agents` option, so a subagent can run without user, project and local CLAUDE.md files; managed policy files still load
