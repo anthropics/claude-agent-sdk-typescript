@@ -70,7 +70,7 @@ describe('S3SessionStore (adapter-specific)', () => {
     const store = new S3SessionStore({ bucket: 'b', prefix: 't', client })
     await store.append(KEY, [{ type: 'a' }])
     const [k] = [...objects.keys()]
-    expect(k).toMatch(/^t\/p\/s\/part-\d{13}-[0-9a-f]{6}\.jsonl$/)
+    expect(k).toMatch(/^t\/p\/s\/part-\d{13}-\d{6}-[0-9a-f]{6}\.jsonl$/)
   })
 
   test('same-ms appends are lexically ordered (monotonic counter)', async () => {
@@ -89,6 +89,68 @@ describe('S3SessionStore (adapter-specific)', () => {
     expect(ks).toEqual([...objects.keys()])
     const loaded = await store.load(KEY)
     expect(loaded?.map(e => e.type)).toEqual(['a', 'b', 'c'])
+  })
+
+  test('a burst does not sort ahead of another writer on the same bucket', async () => {
+    // Two instances mirroring one session is the reason to use a shared
+    // backend. Advancing the timestamp to separate a burst hands the borrowed
+    // milliseconds to whoever writes next, and their part lands inside the
+    // burst.
+    const { client, objects } = makeMockClient()
+    const a = new S3SessionStore({ bucket: 'b', client })
+    const b = new S3SessionStore({ bucket: 'b', client })
+    const original = Date.now
+    let clock = 1700000000000
+    Date.now = () => clock
+    try {
+      for (const type of ['a1', 'a2', 'a3', 'a4', 'a5']) {
+        await a.append(KEY, [{ type }])
+      }
+      clock += 1
+      await b.append(KEY, [{ type: 'b1' }])
+      clock += 1
+      await a.append(KEY, [{ type: 'a6' }])
+    } finally {
+      Date.now = original
+    }
+    expect([...objects.keys()].sort()).toEqual([...objects.keys()])
+    const loaded = await a.load(KEY)
+    expect(loaded?.map(e => e.type)).toEqual([
+      'a1',
+      'a2',
+      'a3',
+      'a4',
+      'a5',
+      'b1',
+      'a6',
+    ])
+  })
+
+  test('a clock that steps backwards keeps an instance in write order', async () => {
+    const { client } = makeMockClient()
+    const store = new S3SessionStore({ bucket: 'b', client })
+    const original = Date.now
+    let clock = 1700000000000
+    Date.now = () => clock
+    try {
+      await store.append(KEY, [{ type: 'a' }])
+      clock -= 5
+      await store.append(KEY, [{ type: 'b' }])
+      await store.append(KEY, [{ type: 'c' }])
+    } finally {
+      Date.now = original
+    }
+    const loaded = await store.load(KEY)
+    expect(loaded?.map(e => e.type)).toEqual(['a', 'b', 'c'])
+  })
+
+  test('listSessions reads the mtime of a part written before the sequence field', async () => {
+    const { client, objects } = makeMockClient()
+    objects.set('p/s/part-1700000000000-abcdef.jsonl', '{"type":"a"}\n')
+    const store = new S3SessionStore({ bucket: 'b', client })
+    expect(await store.listSessions('p')).toEqual([
+      { sessionId: 's', mtime: 1700000000000 },
+    ])
   })
 
   test('append([]) issues no PutObject', async () => {
