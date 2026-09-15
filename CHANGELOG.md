@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.273
+
+- Added a `usage_report` sibling (`SDKUsageReport`: session totals, the plan's usage rows as the server sends them, extra usage) on the assistant message that delivers a headless `/usage` result
+- Added `reason: "worker_restart"` to `task_notification` messages when a background task was stopped by a worker process restart
+- Added a one-line transcript notice when the SDK host's `Stop` or `SessionStart` hook callback times out, shown once until the host answers again
+- Fixed a `Stop`, `SubagentStop` or `SessionStart` hook callback that exceeds its timeout being reported as a hook failure and discarding other hooks' decisions; it now counts as no decision
+- Fixed the browser SSE transport dropping the live slash-command list update (`system/commands_changed`)
+- Updated to parity with Claude Code v2.1.273
+
 ## 0.3.272
 
 - Updated to parity with Claude Code v2.1.272
