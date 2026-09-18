@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.276
+
+- Updated to parity with Claude Code v2.1.276
+
 ## 0.3.275
 
 - Fixed a deferred tool call's result being emitted with internal keys such as `toolUseResult` instead of `tool_use_result` when the tool re-runs at the start of a resumed turn
