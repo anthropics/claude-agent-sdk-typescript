@@ -8,11 +8,13 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test test/RedisSessionStore.test.ts",
     "test:live": "bun test test/conformance.live.test.ts",
-    "demo": "bun run demo.ts"
+    "demo": "bun run demo.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "latest",
-    "ioredis": "^5.4.1"
+    "ioredis": "^5.4.1",
+    "patch-package": "^8.0.1"
   },
   "devDependencies": {
     "@types/bun": "latest",
