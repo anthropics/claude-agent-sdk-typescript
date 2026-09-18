@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.277
+
+- Added an optional `builtin` field to `SlashCommand`, set when a command is built into Claude Code
+- Added `pasted_content` to `SDKUserMessage`: text the user pasted rather than typed, appended after the typed prompt
+- Added optional remote-session latency fields (`first_text_post_ms`, `first_text_post_wall_ms`, `first_stream_post_queue_wait_ms`, `first_stream_post_queued_behind`) to the success result message
+- Added `'userSettings'` as an `updateSettings()` source, accepting only `effortLevel`, which is saved for the session's current model as `/effort` saves it
+- Fixed a resumed or forked session's `total_cost_usd`, `modelUsage` and `get_usage` totals starting at zero instead of continuing from the earlier turns (`maxBudgetUsd` is unchanged)
+- Changed `SDKUsageReport` usage rows to always carry `severity` and `is_active`: the report relays only rows from a live server reply, and none while the usage fetch is failing
+- Updated to parity with Claude Code v2.1.277
+
 ## 0.3.276
 
 - Updated to parity with Claude Code v2.1.276
