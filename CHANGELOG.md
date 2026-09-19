@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.278
+
+- Updated to parity with Claude Code v2.1.278
+
 ## 0.3.277
 
 - Added an optional `builtin` field to `SlashCommand`, set when a command is built into Claude Code
