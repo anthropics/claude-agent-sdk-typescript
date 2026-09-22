@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.280
+
+- Added optional `fireReason` to the task-notification `SDKMessageOrigin`; a local host's declared scheduled-task fire is honored only in a process it started with `CLAUDE_CODE_HOST_SCHEDULED_RUN=1`
+- Added `verbatimPrompts` option: prompts are delivered as written — no `@path` expansion, no slash-command dispatch and, on current CLIs, no ambient attachments with the prompt (Claude Code 2.1.248+)
+- Added `_meta` to `mcpServerStatus()` tool entries, carrying a tool's MCP Apps `ui` metadata so a host can find its `ui://` resource
+- Added `readMcpResource()` (alpha) to read an MCP Apps `ui://` resource from an MCP server that Claude Code connected
+- Improved `askSideQuestion()`: asked while a turn is running, it now sees that turn (its prompt, replies and finished tool results so far) instead of only the last completed turn
+- Improved unattended retry (`CLAUDE_CODE_RETRY_WATCHDOG`): a usage-limit wait emits `rate_limit_event` (`rejected`, `resetsAt`) as it begins; `api_retry` heartbeats continue while sub-agent work waits
+- Changed `session_state_changed` events (`CLAUDE_CODE_EMIT_SESSION_STATE_EVENTS=1`) to report `requires_action` while an MCP elicitation waits on the user, as for permission prompts
+- Changed headless sessions to cancel an MCP server's pending form question when the tool call that drew it ends
+- Updated to parity with Claude Code v2.1.280
+
+## 0.3.279
+
+- Updated to parity with Claude Code v2.1.279
+
 ## 0.3.278
 
 - Updated to parity with Claude Code v2.1.278
