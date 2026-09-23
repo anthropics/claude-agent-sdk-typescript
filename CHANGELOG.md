@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.281
+
+- Added optional `trigger`, `user_message_uuid` and `timestamp` fields to the `conversation_reset` message so clients can tell what reset the conversation, match a /clear to its message, and show when the reset happened
+- Fixed permission and dialog callbacks still being invoked for requests that arrived after `close()`
+- Fixed control requests issued after a query closed hanging or leaking, and permission prompts that could not be cancelled after a cancelled request was redelivered
+- Fixed `session_state_changed` staying at `requires_action` after an overlapping permission prompt and sandbox network-access prompt were both answered
+- Improved SDK package size and load time: `sdk.mjs` no longer bundles unused dependencies (1.47 MB → 0.97 MB)
+- Improved startup time for `query()` sessions with in-process MCP servers (`createSdkMcpServer`) by running their handshake inside the SDK; `initialize` may now wait up to 250 ms for them
+- Improved SDK session start-up: the CLI now answers the host's initialize request before starting its background start-up work
+- Changed the `Settings` type's `attribution` field to `boolean | {...}`; TypeScript code that reads `attribution.commit` from returned settings needs a type narrow
+- Updated to parity with Claude Code v2.1.281
+
 ## 0.3.280
 
 - Added optional `fireReason` to the task-notification `SDKMessageOrigin`; a local host's declared scheduled-task fire is honored only in a process it started with `CLAUDE_CODE_HOST_SCHEDULED_RUN=1`
