@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.282
+
+- Added support for `strictKnownMarketplaces` and `blockedMarketplaces` in host-supplied `managedSettings`: the allowlist applies only where admin policy sets none; the blocklist adds to the admin's
+- Added `@anthropic-ai/claude-agent-sdk/core`, a smaller entry point for apps that bundle the SDK (query, MCP tool helpers, session mutations, `resolveSettings`); it uses your installed zod and MCP SDK
+- Added `prewarm()` and `SpareProcess.claim()` (alpha): start a Claude Code process before its session is known and bind it to a folder and its per-session options later
+- Fixed `readMcpResource()` relaying content `_meta` keys under the CLI-reserved `com.anthropic/` prefix; they are now dropped, as for tool results
+- Updated to parity with Claude Code v2.1.282
+
 ## 0.3.281
 
 - Added optional `trigger`, `user_message_uuid` and `timestamp` fields to the `conversation_reset` message so clients can tell what reset the conversation, match a /clear to its message, and show when the reset happened
