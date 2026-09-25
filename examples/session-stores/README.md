@@ -125,11 +125,15 @@ through the relevant items below.
 Stores transcripts as JSONL part files:
 
 ```
-s3://{bucket}/{prefix}{projectKey}/{sessionId}/part-{epochMs13}-{rand6}.jsonl
+s3://{bucket}/{prefix}{projectKey}/{sessionId}/part-{epochMs13}-{seq6}-{rand6}.jsonl
 ```
 
 Each `append()` writes a new part; `load()` lists, sorts, and concatenates
-them.
+them. Sorting the names lexically is what puts the entries back in order: the
+millisecond orders parts across writers, the sequence orders one instance's
+appends inside a millisecond, and the random suffix breaks the remaining ties.
+Parts written before the sequence field was added are still read and still
+carry their timestamp.
 
 ```typescript
 import { S3Client } from '@aws-sdk/client-s3'
