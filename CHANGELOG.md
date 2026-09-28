@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.284
+
+- Added a renamed skill's directory name to its `SlashCommand` `aliases` when the name is plain and Claude Code ships no command by that name
+- Added `applied.ultracodeAvailable` and `applied.ultracodeRequested` to `getSettings()`: whether this session can run Ultracode, and whether it is requested, independent of whether it is in effect
+- Fixed `forkSession()` copies reading back the wrong history when cut at a progress row or fork briefing after a rewind, or when the session was compacted with some messages kept
+- Fixed `getSessionMessages()` leaving out messages from other agents, sessions and channels that the CLI transcript shows
+- Fixed `{ decision: 'block' }` returned by Elicitation and ElicitationResult hook callbacks being ignored; it now declines the MCP elicitation
+- Fixed `query()` closing stdin before a follow-up turn woken by a finished background agent, which failed that turn's hooks, `canUseTool` and SDK MCP calls with "Stream closed"
+- Changed the first turn to still wait up to 2s for connecting MCP servers named in `allowedTools` or by an `mcp_tool` hook, even with `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` set to `0`
+- Changed `applyFlagSettings({ ultracode: true })` to keep the current effort level instead of switching to `xhigh`; an `effortLevel` that changes the level without `ultracode` turns Ultracode off
+- Updated to parity with Claude Code v2.1.284
+
 ## 0.3.283
 
 - Added `plugin_errors` to the `SDKSystemMessage` type (`system/init`), including `path` for a `--plugin-dir` entry that did not load
