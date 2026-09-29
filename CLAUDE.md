@@ -19,7 +19,9 @@ Keep them when you add or edit a workflow.
    `claude_args` input) passes `--permission-mode auto` in `claude_args`. A tool
    call that needs permission and that the allowed tools do not cover then runs
    only if Claude Code's safety review passes it. Allow only the tools the job
-   needs, and keep any `--disallowedTools` list a step has.
+   needs, and keep any `--disallowedTools` list a step has. Use `claude-opus-4-6`
+   or a newer model: on an older one Claude Code falls back to its default
+   permission mode.
 
 `.github/workflows/workflow-hardening.yml` fails when a job that runs the Claude
 Code action or mentions `ANTHROPIC_FEDERATION_RULE_ID` breaks protection 1 or 3,
