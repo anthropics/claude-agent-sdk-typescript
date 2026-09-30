@@ -1,0 +1,24 @@
+# Hosts that jobs on GitHub's egress-firewall runner (runs-on: ubuntu-24.04-firewall)
+# may reach. All other hosts are blocked, apart from any that GitHub's firewall allows
+# by default. Add a host only when a workflow step needs it, name it in full (no '*'), and say what uses it.
+mode: enforce
+allow:
+  # Claude API: model requests, trading the workflow's GitHub identity token for a
+  # short-lived API token
+  - api.anthropic.com
+  # GitHub API: calls made by the Claude Code action, and by gh in scripts/gh.sh and
+  # scripts/edit-issue-labels.sh
+  - api.github.com
+  # Claude Code install script, fetched by the Claude Code action
+  - claude.ai
+  # Claude Code binary, downloaded by the install script
+  - downloads.claude.ai
+  # Bun release download (oven-sh/setup-bun, used by the Claude Code action)
+  - release-assets.githubusercontent.com
+  # npm packages for the Claude Code action (bun install)
+  - registry.npmjs.org
+  # apt packages bubblewrap and socat, which the Claude Code action installs when a
+  # workflow admits users without write access (issue-triage.yml)
+  - azure.archive.ubuntu.com
+  - archive.ubuntu.com
+  - security.ubuntu.com
