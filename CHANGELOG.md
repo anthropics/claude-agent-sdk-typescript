@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.288
+
+- Updated to parity with Claude Code v2.1.288
+
 ## 0.3.287
 
 - Added optional remote-session latency fields (`first_text_post_queue_wait_ms`, `first_text_post_queued_behind`) to the success result message
