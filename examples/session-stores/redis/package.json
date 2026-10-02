@@ -8,7 +8,8 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test test/RedisSessionStore.test.ts",
     "test:live": "bun test test/conformance.live.test.ts",
-    "demo": "bun run demo.ts"
+    "demo": "bun run demo.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "latest",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "patch-package": "^8.0.1",
     "typescript": "^5.0.0"
   },
   "license": "MIT"
