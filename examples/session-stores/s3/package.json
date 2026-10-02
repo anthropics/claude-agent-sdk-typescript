@@ -8,11 +8,13 @@
     "typecheck": "tsc --noEmit",
     "test": "bun test test/S3SessionStore.test.ts",
     "test:live": "bun test test/conformance.live.test.ts",
-    "demo": "bun run demo.ts"
+    "demo": "bun run demo.ts",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "latest",
-    "@aws-sdk/client-s3": "^3.750.0"
+    "@aws-sdk/client-s3": "^3.750.0",
+    "patch-package": "^8.0.1"
   },
   "devDependencies": {
     "@types/bun": "latest",
