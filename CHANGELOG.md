@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.290
+
+- Added an optional `offset` field to the WebFetch tool input for reading on through long pages
+- Fixed failed Claude in Chrome tool calls dropping the result's `_meta`: when the result has one, `tool_use_result` is now `{ content, _meta }`, as for other MCP tools
+- Fixed deny and ask rules missing `toolAliases` tools when written with a wildcard (`Bash*`), a match-all pattern (`Bash(**)`, also on the mapped name), or an input field also in `disallowedTools`
+- Fixed a user message sent again under the same `uuid` being replayed (`--replay-user-messages`) while the first copy still waited for its turn; its replay now comes when a turn takes it
+- Fixed `includePartialMessages` streams leaving a message without `message_stop` when the stream was cut, interrupted or fell back to non-streaming
+- Changed `user_message_uuid`, `user_message_uuids` and `resume_reason` to also be set on a turn a restarted worker resumes from a permission answer or from tool calls still in flight
+- Updated to parity with Claude Code v2.1.290
+
 ## 0.3.289
 
 - Updated to parity with Claude Code v2.1.289
