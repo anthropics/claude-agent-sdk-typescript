@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.291
+
+- Updated to parity with Claude Code v2.1.291
+
 ## 0.3.290
 
 - Added an optional `offset` field to the WebFetch tool input for reading on through long pages
