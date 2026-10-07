@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.293
+
+- Added an optional `subagent_type` to `background_tasks_changed` task entries, so hosts can name each subagent's type without pairing with `task_started`
+- Updated to parity with Claude Code v2.1.293
+
 ## 0.3.292
 
 - Added `agent_id` to the `assistant` and `user` messages a subagent produces; it equals the `task_id` on that subagent's task events and stays the same when the subagent is resumed
