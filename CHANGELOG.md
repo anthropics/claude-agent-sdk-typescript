@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.294
+
+- Updated to parity with Claude Code v2.1.294
+
 ## 0.3.293
 
 - Added an optional `subagent_type` to `background_tasks_changed` task entries, so hosts can name each subagent's type without pairing with `task_started`
