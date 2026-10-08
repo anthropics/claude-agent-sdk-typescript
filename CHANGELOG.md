@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.295
+
+- Added `overageEnabled` to `SDKRateLimitInfo`: on usage-limit warnings, whether the account has extra usage turned on
+- Fixed an MCP server added with `mcp_set_servers` sometimes keeping an outdated tool list when another server in the same request connected later
+- Fixed assistant text blocks losing their `citations` in streamed responses
+- Fixed Claude being told "disabled by the user" about an in-process MCP server that was switched off with `toggleMcpServer()`
+- Fixed `rate_limit_event` with status `allowed_warning` omitting `overageStatus`, `overageResetsAt` and `overageDisabledReason`, which `allowed` and `rejected` events already carry
+- Changed MCP tool descriptions the model loads through tool search, including those from in-process SDK servers, to be cut at 16,384 characters instead of 2,048
+- Changed a permission answer whose `updatedPermissions` holds over 4,096 updates, rules and directories to count as a denial
+- Changed `tool_result_meta[].non_execution_kind` to be absent when a mod withheld the result of a tool that ran without error; it was `permission-rule`
+- Changed `pasted_content` on user messages to be ignored when it holds over 1,000 entries and blocks in all
+- Changed how the SDK passes option values to Claude Code: the values of its named options are now sent in the same argument as their flag (`--flag=value`)
+- Changed `tool_use_result` for MCP Apps tools: `structuredContent` or `_meta` over 8,388,608 JSON characters is left off, and `_meta.ui` with no `ui://` resource no longer lifts the ordinary caps
+- Changed `tool_use_result` for MCP tools: when a long result is saved to a file, or cut because it could not be, the text kept past 500,000 characters is dropped, with a note of how much
+- Changed `tool_use_result` for MCP tools: a result `_meta` over 1,048,576 JSON characters is left off, except for SDK-server tools; so is text blocks' `_meta` that totals over 65,536
+- Updated to parity with Claude Code v2.1.295
+
 ## 0.3.294
 
 - Updated to parity with Claude Code v2.1.294
