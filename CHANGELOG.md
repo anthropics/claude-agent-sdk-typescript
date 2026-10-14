@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.299
+
+- Added an optional `nextFireAt` (epoch ms of the next run) to the CronCreate and CronList tool outputs
+- Added `property_order` to the `elicitation` control request: a form's field names in the order the MCP server listed them, for hosts whose transport keeps no JSON object key order
+- Fixed `rewind_conversation` answering "target not found" for a message stopped during its prompt hooks or plugins: until a reply or input follows, it answers `rewound: true` with a null `prefillText`
+- Fixed in-process SDK MCP servers named `constructor` or `toString` being silently dropped when a `prewarm()` process is claimed with `SpareProcess.claim()`
+- Fixed queued user messages with content-block arrays running together without a line break when merged into one turn
+- Fixed `origin.body` on a user message that merges several queued peer messages (from other sessions or agents) carrying only the first message's text; it is now omitted
+- Changed `initialize`, `mcp_set_servers` and `claim_session` to refuse the reserved MCP server names `__proto__`, `__defineGetter__`, `__defineSetter__`, `__lookupGetter__`, `__lookupSetter__`
+- Updated to parity with Claude Code v2.1.299
+
+## 0.3.298
+
+- Updated to parity with Claude Code v2.1.298
+
+## 0.3.297
+
+- Updated to parity with Claude Code v2.1.297
+
 ## 0.3.296
 
 - Added `claude_code_version` to the `initialize` control response so clients know the CLI version before the first turn
