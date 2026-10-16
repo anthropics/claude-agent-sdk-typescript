@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.302
+
+- Fixed structured output results delivering a response's output as `structured_output` when the API refused that response; the result is now an error with no payload
+- Changed an omitted `permissionMode` to start in `default` mode on third-party providers, with telemetry off or on a fresh install; pass `permissionMode: 'auto'` to keep auto mode
+- Changed fork subagents (`subagent_type: "fork"`) to be on by default in SDK sessions, as in the terminal; `run_in_background` is still offered, and `CLAUDE_CODE_FORK_SUBAGENT=0` turns them off
+- Updated to parity with Claude Code v2.1.302
+
 ## 0.3.301
 
 - Added per-tool permission policies to sdk-type MCP server configs: `tools` entries with `permission_policy` `always_ask` or `always_deny`, applied on `initialize` and `setMcpServers()`
