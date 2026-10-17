@@ -23,7 +23,7 @@ export class PostgresSessionStore implements SessionStore {
   constructor(opts: PostgresSessionStoreOptions) {
     this.pool = opts.pool
     const t = opts.tableName ?? 'claude_session_entries'
-    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(t)) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*$/.test(t)) {
       throw new Error(`invalid tableName: ${t}`)
     }
     this.table = t
@@ -41,8 +41,9 @@ export class PostgresSessionStore implements SessionStore {
         created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `)
+    const indexName = `${this.table.replace(/\./g, '_')}_key_idx`
     await this.pool.query(`
-      CREATE INDEX IF NOT EXISTS ${this.table}_key_idx
+      CREATE INDEX IF NOT EXISTS ${indexName}
         ON ${this.table} (project_key, session_id, subpath, id)
     `)
   }
@@ -80,7 +81,7 @@ export class PostgresSessionStore implements SessionStore {
   async listSessions(
     projectKey: string,
   ): Promise<Array<{ sessionId: string; mtime: number }>> {
-    const { rows } = await this.pool.query<{ session_id: string; mtime: Date }>(
+    const { rows } = await this.pool.query<{ session_id: string; mtime: Date | string | number }>(
       `SELECT session_id, MAX(created_at) AS mtime FROM ${this.table}
          WHERE project_key = $1 AND subpath IS NULL
          GROUP BY session_id
@@ -89,12 +90,12 @@ export class PostgresSessionStore implements SessionStore {
     )
     return rows.map(r => ({
       sessionId: r.session_id,
-      mtime: r.mtime.getTime(),
+      mtime: r.mtime instanceof Date ? r.mtime.getTime() : new Date(r.mtime).getTime(),
     }))
   }
 
   async delete(key: SessionKey): Promise<void> {
-    if (key.subpath === undefined) {
+    if (key.subpath == null) {
       // Main-transcript delete cascades to all subpaths under (projectKey, sessionId).
       await this.pool.query(
         `DELETE FROM ${this.table} WHERE project_key = $1 AND session_id = $2`,
