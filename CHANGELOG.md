@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.303
+
+- Updated to parity with Claude Code v2.1.303
+
 ## 0.3.302
 
 - Fixed structured output results delivering a response's output as `structured_output` when the API refused that response; the result is now an error with no payload
