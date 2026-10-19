@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.304
+
+- Added `suspendSseStream(query)` and `resumeSseStream(query)` to the browser SDK: close a query's event stream and reopen it later without ending the query
+- Added stable row ids to `getContextUsage()`, and, when the CLI answers on its own stdio, plugin ids, agent and skill file paths, and per-server MCP instruction token shares
+- Fixed `startup()` timing out while a SessionStart or Setup command hook was running when no `initializeTimeoutMs` is passed: up to 10 minutes of that time no longer counts toward the 60-second limit, and the timeout error now says what the process reported
+- Fixed `startup()` keeping every `hook_progress` message of a running SessionStart or Setup hook in memory until it resolved; it now keeps only the newest one for each hook
+- Updated to parity with Claude Code v2.1.304
+
 ## 0.3.303
 
 - Updated to parity with Claude Code v2.1.303
