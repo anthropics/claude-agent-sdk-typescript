@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.305
+
+- Added `recommendations` and `fix` to the `get_usage` response's behavior windows
+- Fixed servers set with `setMcpServers` being replaced later in the session by a same-named server from the user's own settings
+- Fixed `startup()` with `initializeTimeoutMs: null` counting time spent in SessionStart or Setup hooks against its 60-second limit; `null` now works like leaving the option out
+- Changed the `startup()` and `prewarm()` timeout error for a start with no open SessionStart or Setup hook: it lists possible causes and no longer says to check authentication and network
+- Updated to parity with Claude Code v2.1.305
+
 ## 0.3.304
 
 - Added `suspendSseStream(query)` and `resumeSseStream(query)` to the browser SDK: close a query's event stream and reopen it later without ending the query
