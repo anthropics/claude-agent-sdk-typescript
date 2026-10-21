@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.307
+
+- Added `wakeup_source` to the `command_lifecycle` `started` frame of a scheduled wakeup or task, and `scheduled_for` for a wakeup (capability `lifecycle_wakeup_source_v1`), so a host can tell which one fired
+- Added `supportedDialogKinds` to browser SDK `query()`, sent on `initialize`; a non-empty list requires `onUserDialog`
+- Updated to parity with Claude Code v2.1.307
+
 ## 0.3.306
 
 - Updated to parity with Claude Code v2.1.306
