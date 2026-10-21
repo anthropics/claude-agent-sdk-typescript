@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.306
+
+- Updated to parity with Claude Code v2.1.306
+
 ## 0.3.305
 
 - Added `recommendations` and `fix` to the `get_usage` response's behavior windows
