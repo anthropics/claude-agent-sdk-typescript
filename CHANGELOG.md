@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.309
+
+- Fixed host-supplied `managedSettings` dropping `disableAllHooks`, `disableSkillShellExecution` and empty `allowedHttpHookUrls` / `httpHookAllowedEnvVars` lists
+- Changed `extractFromBunfs()` to extract the embedded CLI into its own per-user temp directory (`claude-agent-sdk-<uid>`, or `claude-agent-sdk` on Windows) instead of Claude Code's temp root
+- Changed `extractFromBunfs()` to reuse an already-extracted file only when its bytes match the embedded binary, replacing it otherwise
+- Updated to parity with Claude Code v2.1.309
+
 ## 0.3.308
 
 - Updated to parity with Claude Code v2.1.308
