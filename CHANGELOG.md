@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.310
+
+- Updated to parity with Claude Code v2.1.310
+
 ## 0.3.309
 
 - Fixed host-supplied `managedSettings` dropping `disableAllHooks`, `disableSkillShellExecution` and empty `allowedHttpHookUrls` / `httpHookAllowedEnvVars` lists
