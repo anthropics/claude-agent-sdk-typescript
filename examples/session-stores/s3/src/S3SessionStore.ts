@@ -17,6 +17,19 @@ import type {
 
 const LOAD_CONCURRENCY = 16
 
+/** Encode one key component so it cannot contain the '/' separator. */
+function encodePart(value: string): string {
+  return encodeURIComponent(value)
+}
+
+function decodePart(value: string): string | undefined {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return undefined
+  }
+}
+
 export type S3SessionStoreOptions = {
   /** S3 bucket name */
   bucket: string
@@ -45,16 +58,16 @@ export class S3SessionStore implements SessionStore {
 
   /** Directory prefix for a session (or subpath). Always ends in '/'. */
   private keyPrefix(key: SessionKey): string {
-    const parts = [key.projectKey, key.sessionId]
+    const parts = [encodePart(key.projectKey), encodePart(key.sessionId)]
     if (key.subpath) {
-      parts.push(key.subpath)
+      parts.push(encodePart(key.subpath))
     }
     return this.prefix + parts.join('/') + '/'
   }
 
   /** Directory prefix for a project. Always ends in '/'. */
   private projectPrefix(projectKey: string): string {
-    return this.prefix + projectKey + '/'
+    return this.prefix + encodePart(projectKey) + '/'
   }
 
   /**
@@ -193,7 +206,10 @@ export class S3SessionStore implements SessionStore {
           if (rest.indexOf('/', slash + 1) !== -1) {
             continue
           }
-          const sessionId = rest.slice(0, slash)
+          const sessionId = decodePart(rest.slice(0, slash))
+          if (sessionId === undefined) {
+            continue
+          }
           const m = obj.Key.match(/\/part-(\d{13})-[0-9a-f]{6}\.jsonl$/)
           const mtime = m ? Number(m[1]) : (obj.LastModified?.getTime() ?? 0)
           const prev = sessions.get(sessionId) ?? 0
@@ -284,7 +300,8 @@ export class S3SessionStore implements SessionStore {
             const parts = rel.split('/')
             if (parts.length >= 2) {
               // subpath is everything except the last segment (the part file)
-              const subpath = parts.slice(0, -1).join('/')
+              const encoded = parts.slice(0, -1).join('/')
+              const subpath = encoded ? decodePart(encoded) : undefined
               if (subpath) {
                 subkeys.add(subpath)
               }

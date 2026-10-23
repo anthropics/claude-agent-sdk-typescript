@@ -91,6 +91,28 @@ describe('S3SessionStore (adapter-specific)', () => {
     expect(loaded?.map(e => e.type)).toEqual(['a', 'b', 'c'])
   })
 
+  test('a slash in one component cannot address another session prefix', async () => {
+    const { client, objects } = makeMockClient()
+    const store = new S3SessionStore({ bucket: 'b', client })
+    await store.append(
+      { projectKey: 'p', sessionId: 's', subpath: 'x' },
+      [{ type: 'sub' }],
+    )
+    await store.append(
+      { projectKey: 'p', sessionId: 's/x' },
+      [{ type: 'slash' }],
+    )
+    expect(
+      await store.load({ projectKey: 'p', sessionId: 's', subpath: 'x' }),
+    ).toEqual([{ type: 'sub' }])
+    expect(await store.load({ projectKey: 'p', sessionId: 's/x' })).toEqual([
+      { type: 'slash' },
+    ])
+    const keys = [...objects.keys()]
+    expect(keys.some(k => k.startsWith('p/s/x/'))).toBe(true)
+    expect(keys.some(k => k.startsWith('p/s%2Fx/'))).toBe(true)
+  })
+
   test('append([]) issues no PutObject', async () => {
     const { client, calls } = makeMockClient()
     const store = new S3SessionStore({ bucket: 'b', client })
