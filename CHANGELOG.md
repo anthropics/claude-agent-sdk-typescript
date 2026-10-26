@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.311
+
+- Added `cacheCreationEphemeral5mInputTokens` and `cacheCreationEphemeral1hInputTokens` to `ModelUsage`, splitting `cacheCreationInputTokens` by cache lifetime
+- Changed background start-up work to wait until the first model request is sent, for about 10 seconds at most, when the first message arrives during start-up
+- Changed the minimum supported Node.js version from 18.0.0 to 18.14.0
+- Updated to parity with Claude Code v2.1.311
+
 ## 0.3.310
 
 - Updated to parity with Claude Code v2.1.310
