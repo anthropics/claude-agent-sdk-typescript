@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.312
+
+- Added `autoMode`, `skipAutoPermissionPrompt`, `useAutoModeDuringPlan` and `permissions.disableAutoMode` to the `Settings` type
+- Added `unanswered` (`skipped`, `replied_in_chat` or `dismissed`) to AskUserQuestion answers' per-question `annotations`; send it only when `system/init` lists the `ask_user_question_unanswered_v1` capability
+- Fixed `resolveSettings()` returning mistyped managed auto-mode settings, such as `permissions.disableAutoMode: true`, as written instead of reading them as the CLI does; a user or project settings file whose auto-mode keys hold an invalid value is now skipped, as in the CLI
+- Updated to parity with Claude Code v2.1.312
+
 ## 0.3.311
 
 - Added `cacheCreationEphemeral5mInputTokens` and `cacheCreationEphemeral1hInputTokens` to `ModelUsage`, splitting `cacheCreationInputTokens` by cache lifetime
