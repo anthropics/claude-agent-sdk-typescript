@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.314
+
+- Added `sandbox_required_unavailable` to `startup_failure_reason`, for the result Claude Code writes when a required sandbox cannot run
+- Added `permissions.blockWritesOutsideWorkingDirectories` to the `Settings` type
+- Added `prewarm()` (alpha) to the `@anthropic-ai/claude-agent-sdk/core` entry point
+- Fixed a settings file left out of `settingSources` still supplying some settings, such as auto mode rules and saved permission consents
+- Updated to parity with Claude Code v2.1.314
+
+## 0.3.313
+
+- Updated to parity with Claude Code v2.1.313
+
 ## 0.3.312
 
 - Added `autoMode`, `skipAutoPermissionPrompt`, `useAutoModeDuringPlan` and `permissions.disableAutoMode` to the `Settings` type
