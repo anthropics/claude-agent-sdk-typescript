@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.316
+
+- Added `permissions.blockReadsExemptPaths` to the `Settings` type: paths, read only from `--settings` and settings the host sends, that `blockReadsOutsideWorkingDirectories` lets through without making them working directories
+- Updated to parity with Claude Code v2.1.316
+
+## 0.3.315
+
+- Updated to parity with Claude Code v2.1.315
+
 ## 0.3.314
 
 - Added `sandbox_required_unavailable` to `startup_failure_reason`, for the result Claude Code writes when a required sandbox cannot run
