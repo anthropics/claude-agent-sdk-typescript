@@ -27,14 +27,17 @@ export type S3SessionStoreOptions = {
 }
 
 /**
- * S3-backed SessionStore. append() = new part file `{prefix}{projectKey}/{sessionId}/part-{epochMs13}-{rand6}.jsonl`;
- * load() = list+sort+concat. Monotonic ms orders same-instance same-ms appends; rand suffix disambiguates instances.
+ * S3-backed SessionStore. append() = new part file `{prefix}{projectKey}/{sessionId}/part-{epochMs13}-{seq6}-{rand6}.jsonl`;
+ * load() = list+sort+concat. The epoch ms orders appends across writers, the
+ * per-millisecond sequence orders same-instance appends inside one ms, and the
+ * rand suffix disambiguates instances that land on the same ms and sequence.
  */
 export class S3SessionStore implements SessionStore {
   private readonly bucket: string
   private readonly prefix: string
   private readonly client: S3Client
   private lastMs = 0
+  private seq = 0
 
   constructor(options: S3SessionStoreOptions) {
     this.bucket = options.bucket
@@ -58,15 +61,26 @@ export class S3SessionStore implements SessionStore {
   }
 
   /**
-   * Fixed-width epoch ms → lexical sort = chronological. lastMs+1 makes
-   * same-instance same-ms appends deterministic; rand disambiguates instances.
+   * Fixed-width epoch ms → lexical sort = chronological. The sequence counter
+   * separates same-instance appends inside one millisecond without moving the
+   * timestamp: borrowing from a later millisecond would sort this instance's
+   * burst after a part another writer stamps with the millisecond it borrowed,
+   * and two writers sharing a bucket is the reason to use this adapter at all.
+   * A clock that steps backwards keeps the last millisecond and advances the
+   * sequence, so an instance's own parts stay in the order it wrote them.
    */
   private nextPartName(): string {
     const now = Date.now()
-    const ms = Math.max(now, this.lastMs + 1)
-    this.lastMs = ms
+    if (now > this.lastMs) {
+      this.lastMs = now
+      this.seq = 0
+    } else {
+      this.seq += 1
+    }
     const rand = Math.random().toString(16).slice(2, 8).padStart(6, '0')
-    return `part-${ms.toString().padStart(13, '0')}-${rand}.jsonl`
+    return `part-${this.lastMs.toString().padStart(13, '0')}-${this.seq
+      .toString()
+      .padStart(6, '0')}-${rand}.jsonl`
   }
 
   async append(key: SessionKey, entries: SessionStoreEntry[]): Promise<void> {
@@ -194,7 +208,10 @@ export class S3SessionStore implements SessionStore {
             continue
           }
           const sessionId = rest.slice(0, slash)
-          const m = obj.Key.match(/\/part-(\d{13})-[0-9a-f]{6}\.jsonl$/)
+          // Parts written before the sequence field carry only the rand suffix.
+          const m = obj.Key.match(
+            /\/part-(\d{13})-(?:\d{6}-)?[0-9a-f]{6}\.jsonl$/,
+          )
           const mtime = m ? Number(m[1]) : (obj.LastModified?.getTime() ?? 0)
           const prev = sessions.get(sessionId) ?? 0
           if (mtime > prev) {
