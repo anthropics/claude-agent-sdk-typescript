@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.317
+
+- Added `onFailure` to hook matchers: with `"block"`, a hook that throws or returns invalid output blocks the action
+- Added a warning message in the stream when a hook callback fails
+- Added a `session_writes_lost` system message, sent after the last result when a full disk or disk quota kept the CLI from saving the session transcript or ~/.claude.json
+- Added `initialize_not_first` to `startup_failure_reason`, for a `--await-initialize` launch whose first stdin line is not the initialize request
+- Added `task.description` to the TaskCreate tool's `tool_use_result`: the description the task was created with
+- Added `lossy` to `readFile()` utf-8 answers: `true` when decoding replaced bytes that are not valid UTF-8
+- Removed the `file_unchanged` variant of `FileReadOutput` in `sdk-tools.d.ts`; a repeated Read now returns the file content
+- Fixed `setMcpServers` closing a folder's `.mcp.json` and local-scope MCP servers in sessions started with `prewarm()` and bound with `SpareProcess.claim()`
+- Updated to parity with Claude Code v2.1.317
+
 ## 0.3.316
 
 - Added `permissions.blockReadsExemptPaths` to the `Settings` type: paths, read only from `--settings` and settings the host sends, that `blockReadsOutsideWorkingDirectories` lets through without making them working directories
