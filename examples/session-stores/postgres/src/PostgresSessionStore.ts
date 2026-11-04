@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import type { Pool } from 'pg'
 import type {
   SessionKey,
@@ -23,7 +24,7 @@ export class PostgresSessionStore implements SessionStore {
   constructor(opts: PostgresSessionStoreOptions) {
     this.pool = opts.pool
     const t = opts.tableName ?? 'claude_session_entries'
-    if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*$/.test(t)) {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/.test(t)) {
       throw new Error(`invalid tableName: ${t}`)
     }
     this.table = t
@@ -41,7 +42,10 @@ export class PostgresSessionStore implements SessionStore {
         created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `)
-    const indexName = `${this.table.replace(/\./g, '_')}_key_idx`
+    const hash = createHash('sha256').update(this.table).digest('hex').slice(0, 8)
+    const sanitized = this.table.replace(/\./g, '_')
+    const prefix = sanitized.slice(0, 45)
+    const indexName = `${prefix}_${hash}_key_idx`
     await this.pool.query(`
       CREATE INDEX IF NOT EXISTS ${indexName}
         ON ${this.table} (project_key, session_id, subpath, id)

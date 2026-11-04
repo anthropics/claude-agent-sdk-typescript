@@ -212,7 +212,25 @@ describe('PostgresSessionStore (adapter-specific)', () => {
     ).not.toThrow()
   })
 
-  test('ensureSchema sanitizes index name for schema-qualified table', async () => {
+  test('rejects multi-dot tableName', () => {
+    expect(
+      () =>
+        new PostgresSessionStore({
+          pool: {} as Pool,
+          tableName: 'a.b.c',
+        }),
+    ).toThrow(/invalid tableName/)
+
+    expect(
+      () =>
+        new PostgresSessionStore({
+          pool: {} as Pool,
+          tableName: 'custom.sub.my_sessions',
+        }),
+    ).toThrow(/invalid tableName/)
+  })
+
+  test('ensureSchema sanitizes index name and prevents collision for schema-qualified table', async () => {
     const executedQueries: string[] = []
     const pool = makeMockPool((sql: string) => executedQueries.push(sql))
     const store = new PostgresSessionStore({
@@ -223,8 +241,23 @@ describe('PostgresSessionStore (adapter-specific)', () => {
 
     const indexQuery = executedQueries.find(q => q.includes('CREATE INDEX'))
     expect(indexQuery).toBeDefined()
-    expect(indexQuery).toContain('custom_schema_my_sessions_key_idx')
     expect(indexQuery).not.toContain('custom_schema.my_sessions_key_idx')
+    expect(indexQuery).toMatch(/CREATE INDEX IF NOT EXISTS custom_schema_my_sessions_[a-f0-9]{8}_key_idx/)
+
+    // Verify distinct table names with matching sanitized prefixes produce distinct index names
+    executedQueries.length = 0
+    const storeA = new PostgresSessionStore({ pool, tableName: 'a_b.c' })
+    const storeB = new PostgresSessionStore({ pool, tableName: 'a.b_c' })
+    await storeA.ensureSchema()
+    const indexQueryA = executedQueries[executedQueries.length - 1]
+    await storeB.ensureSchema()
+    const indexQueryB = executedQueries[executedQueries.length - 1]
+
+    const matchA = indexQueryA.match(/CREATE INDEX IF NOT EXISTS ([a-z0-9_]+)/i)
+    const matchB = indexQueryB.match(/CREATE INDEX IF NOT EXISTS ([a-z0-9_]+)/i)
+    expect(matchA).not.toBeNull()
+    expect(matchB).not.toBeNull()
+    expect(matchA![1]).not.toEqual(matchB![1])
   })
 
   test('delete with null subpath cascades to all subkeys without silent failure', async () => {
