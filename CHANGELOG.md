@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.318
+
+- Added an optional `credential_expires_at` field to result messages: when the stored claude.ai sign-in in use ends
+- Added the `config_file_invalid` startup failure reason, reported when a configuration file read at startup isn't valid JSON
+- Fixed the interrupt response missing a message held behind a model change: it is now listed, cancelled with `cancel_queued`, and stopped at start-up as a queued message is
+- Changed `agentProgressSummaries`: while the subagent waits for a response on a likely-cold prompt cache, a summary can wait up to 5 minutes, and is not sent if the subagent ends first
+- Changed `status` in `PushNotificationInput` to optional
+- Updated to parity with Claude Code v2.1.318
+
 ## 0.3.317
 
 - Added `onFailure` to hook matchers: with `"block"`, a hook that throws or returns invalid output blocks the action
