@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.322
+
+- Updated to parity with Claude Code v2.1.322
+
 ## 0.3.321
 
 - Fixed `canUseTool` getting the app's own PreToolUse hook reason in `decisionReason` when another hook also asked
