@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.323
+
+- Added `machinePolicy.didNotLoad` (alpha) to `resolveSettings()`'s result, which tells a host when a machine policy source may be there and did not load
+- Added `matchDeniedModels()` (alpha), which tells a host which models a `deniedModels` list blocks, by Claude Code's own entry rules
+- Added the periodic `tool_progress` heartbeat while a turn waits on long-running hooks; `tool_name` is the hook event, `tool_use_id` begins `hook-`, `parent_tool_use_id` may name no tool call
+- Added `CLAUDE_CODE_DISABLE_AGENT_PROGRESS_SUMMARIES`: set to `1` to turn off subagent progress summaries even when `agentProgressSummaries` is `true` (available since 0.3.318)
+- Added `tool_use_result` to a subagent's WebSearch result message when the search did not run or found nothing
+- Fixed progress notifications from SDK MCP servers being dropped for tool calls that were still running when the set of SDK MCP servers changed
+- Fixed `resolveSettings()` keeping its first reading of a macOS MDM profile or Windows registry policy for the life of the process: it now re-reads after 30 minutes, and sooner after a read that failed
+- Fixed `forkSession()` with `upToMessageId`: forking at a compaction summary no longer brings back the messages kept after it, and forking at a compaction boundary keeps the conversation before it
+- Fixed `getSessionMessages` leaving out a queued prompt that directly follows a compaction summary
+- Fixed `canUseTool` suggestions including a Bash allow rule for commands that write to sensitive paths such as `.git` or `.claude`, where the rule did not stop the next request
+- Fixed most `initialize` options, such as agents and skills, being ignored when a `SessionStart` hook supplied the first message
+- Fixed an MCP server removed and re-added with `setMcpServers()` staying `needs-auth` with no tools when a tool call had tried to reach it in between
+- Fixed `init.plugin_errors` omitting a plugin that only project settings enable but that isn't installed; it now reports it as not installed, with the install command
+- Changed `init.plugin_errors` to also list load errors of plugins that managed settings enable; a check on it can trip before the background install ends (`CLAUDE_CODE_SYNC_PLUGIN_INSTALL=1` waits)
+- Changed `supersedes` on assistant messages to also be sent after a response whose tool call could not be parsed
+- Changed what happens when a tool's permission check fails with an error after a `PreToolUse` hook allowed the call: it now goes to `canUseTool`, or is refused when there is no callback
+- Updated to parity with Claude Code v2.1.323
+
 ## 0.3.322
 
 - Updated to parity with Claude Code v2.1.322
