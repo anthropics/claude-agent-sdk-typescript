@@ -12,23 +12,22 @@ export type RedisSessionStoreOptions = {
   prefix?: string
 }
 
-/** Reserved subpath sentinel for the per-session subkey set. */
-const SUBKEYS = '__subkeys'
-/** Reserved sessionId sentinel for the per-project session index. */
-const SESSIONS = '__sessions'
+/** Encode one key component so it cannot contain the ':' separator. */
+function encodePart(value: string): string {
+  return encodeURIComponent(value)
+}
 
 /**
  * Redis-backed SessionStore.
  *
- * Key scheme (':' separator; projectKey/sessionId are opaque so collisions
- * with the SDK's '/'-based projectKey are avoided):
- *   {prefix}:{projectKey}:{sessionId}             → list (RPUSH/LRANGE) of JSON entries
- *   {prefix}:{projectKey}:{sessionId}:{subpath}   → list of JSON entries
- *   {prefix}:{projectKey}:{sessionId}:__subkeys   → set of subpaths under this session
- *   {prefix}:{projectKey}:__sessions              → sorted set of sessionId, score=mtime(ms)
- *
- * Index keys (`__subkeys`, `__sessions`) live in reserved positions; the SDK
- * never emits a sessionId of `__sessions` or a subpath of `__subkeys`.
+ * Key scheme. Each caller-supplied component is percent-encoded, then placed
+ * after a fixed type tag. The tag is what keeps a session id of `sessions`
+ * or `__sessions` from landing on the index key. Encoding is what keeps
+ * `sessionId: "a:b"` from being the same key as session `a` plus subpath `b`.
+ *   {prefix}entry:{projectKey}:{sessionId}             → list of JSON entries
+ *   {prefix}entry:{projectKey}:{sessionId}:{subpath}   → list of JSON entries
+ *   {prefix}subkeys:{projectKey}:{sessionId}           → set of subpaths
+ *   {prefix}sessions:{projectKey}                      → sorted set of sessionId, score=mtime(ms)
  *
  * Retention: callers may set `EXPIRE` on the prefix via Redis-side policy or
  * call `delete()`; this adapter never expires keys on its own.
@@ -45,19 +44,19 @@ export class RedisSessionStore implements SessionStore {
 
   /** Redis key for a transcript list (main or subpath). */
   private entryKey(key: SessionKey): string {
-    const parts = [key.projectKey, key.sessionId]
-    if (key.subpath) parts.push(key.subpath)
-    return this.prefix + parts.join(':')
+    const parts = [encodePart(key.projectKey), encodePart(key.sessionId)]
+    if (key.subpath) parts.push(encodePart(key.subpath))
+    return this.prefix + 'entry:' + parts.join(':')
   }
 
   /** Redis key for the per-session subpath set. */
   private subkeysKey(key: { projectKey: string; sessionId: string }): string {
-    return `${this.prefix}${key.projectKey}:${key.sessionId}:${SUBKEYS}`
+    return `${this.prefix}subkeys:${encodePart(key.projectKey)}:${encodePart(key.sessionId)}`
   }
 
   /** Redis key for the per-project session index (sorted set, score=mtime). */
   private sessionsKey(projectKey: string): string {
-    return `${this.prefix}${projectKey}:${SESSIONS}`
+    return `${this.prefix}sessions:${encodePart(projectKey)}`
   }
 
   async append(key: SessionKey, entries: SessionStoreEntry[]): Promise<void> {

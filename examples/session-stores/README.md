@@ -197,11 +197,15 @@ for await (const message of query({
 ### Key scheme
 
 ```
-{prefix}:{projectKey}:{sessionId}             list   — main transcript entries (JSON each)
-{prefix}:{projectKey}:{sessionId}:{subpath}   list   — subagent transcript entries
-{prefix}:{projectKey}:{sessionId}:__subkeys   set    — subpaths under this session
-{prefix}:{projectKey}:__sessions              zset   — sessionId → mtime(ms)
+{prefix}entry:{projectKey}:{sessionId}             list   — main transcript entries (JSON each)
+{prefix}entry:{projectKey}:{sessionId}:{subpath}   list   — subagent transcript entries
+{prefix}subkeys:{projectKey}:{sessionId}           set    — subpaths under this session
+{prefix}sessions:{projectKey}                      zset   — sessionId → mtime(ms)
 ```
+
+`projectKey`, `sessionId`, and `subpath` are percent-encoded before they are
+joined. A colon in an id stays inside that component, and a session id of
+`__sessions` cannot land on the index key.
 
 Each `append()` is an `RPUSH` plus an index update in a single `MULTI`;
 `load()` is `LRANGE 0 -1`.
