@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.325
+
+- Added `archiveSession()` and `unarchiveSession()`, and an `archived` field on the sessions that `listSessions()` and `getSessionInfo()` return
+- Added `refuseIfBusy` to `Query.reloadPlugins()` so a host can have a reload refused while the session is busy
+- Added `managed_lock` to `plugin_errors` entries on `system/init`, naming the managed `enabledPlugins` entry that dropped a plugin copy
+- Added a `system/informational` warning, tagged `hook_no_verdict`, when a `PreToolUse` hook can't run or answer, or times out, without refusing its tool call
+- Added `invalid_config_file` to the `config_file_invalid` startup failure result: the broken config file's path and its backup's path as fields
+- Fixed deny rules (`disallowedTools`, `permissions.deny`, `always_deny`) that name an in-process SDK MCP tool or its server, or match it with a glob, leaving it in Claude's tool list and `system/init`
+- Fixed `supportedEffortLevels` in model info listing effort levels above the organization's effort cap or the `maxEffortLevel` setting
+- Changed the `sandbox` option: sandboxed Bash commands are no longer auto-approved unless `autoAllowBashIfSandboxed: true` is set
+- Changed read-only git commands in a repository that isn't the working directory's, an additional directory's or a trusted one to go through the permission flow instead of being auto-approved
+- Changed `applyFlagSettings()` to reject when a value would make Claude Code discard its settings layer, applying nothing and keeping settings from earlier calls
+- Changed `suggestions` on `canUseTool` for Bash and Monitor: a list of rules alone is sent only when saving it would allow that command
+- Changed the `ProposeSkillsInput` type: a proposal can carry `edits`, and `skillMd` is optional
+- Updated to parity with Claude Code v2.1.325
+
+## 0.3.324
+
+- Updated to parity with Claude Code v2.1.324
+
 ## 0.3.323
 
 - Added `machinePolicy.didNotLoad` (alpha) to `resolveSettings()`'s result, which tells a host when a machine policy source may be there and did not load
