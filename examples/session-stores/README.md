@@ -203,7 +203,7 @@ for await (const message of query({
 {prefix}:{projectKey}:__sessions              zset   — sessionId → mtime(ms)
 ```
 
-Each `append()` is an `RPUSH` plus an index update in a single `MULTI`;
+Each `append()` atomically checks key types, runs `RPUSH`, and updates the index;
 `load()` is `LRANGE 0 -1`.
 
 ### Live Redis end-to-end
