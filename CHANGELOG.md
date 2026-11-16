@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.326
+
+- Added `mcpServersDelivery: 'initialize'`: sends `mcpServers` in the initialize request instead of on Claude Code's command line; needs the bundled Claude Code or newer
+- Added `getSessionInfo()` to the `/core` entry
+- Added `message_uuid` to `cancel_async_message` responses, naming the dropped message
+- Added a warning on stderr and as a `system/informational` message when a tool list has an entry that doesn't look like a complete rule
+- Added a `system/informational` warning, tagged `managed_mcp_arrived`, when an administrator's `managed-mcp.json` arrives during a session and your own MCP servers stop loading
+- Fixed a tool call in a running turn reconnecting to an MCP server just removed with `setMcpServers()`, or reporting that it needs authentication; the call is now refused
+- Fixed `resumeSessionAt` failing on an empty reply, and a resumed session losing recent turns after a crash when the previous turn ended with one
+- Fixed a tool result from an SDK MCP server being lost, or delivered to another call, when a long call overlapped a reconnect of the SDK MCP servers
+- Fixed a hook request that arrives while the SDK is still starting up being refused instead of answered
+- Improved how secrets are masked in the `description` passed to `canUseTool`; `input` itself is unchanged
+- Improved the first turn after `SpareProcess.claim()`: it no longer waits up to 500 ms for the stdio MCP servers the claim starts, where tool search loads their tools on demand
+- Changed the JSON-RPC `id` of requests to an SDK MCP server from a number to a string
+- Changed `rewindFiles()` on macOS, Linux and WSL to leave some files untouched when the sandbox is on, and report them as skipped
+- Changed the `register_repo_root` control request to refuse some folders it used to accept
+- Deprecated sending `mcpServers` on Claude Code's command line (today's default, `'argv'`): a future release defaults to `'initialize'`; apps running an older Claude Code must update it or set `'argv'`
+- Updated to parity with Claude Code v2.1.326
+
 ## 0.3.325
 
 - Added `archiveSession()` and `unarchiveSession()`, and an `archived` field on the sessions that `listSessions()` and `getSessionInfo()` return
