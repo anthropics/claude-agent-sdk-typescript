@@ -128,6 +128,8 @@ Stores transcripts as JSONL part files:
 s3://{bucket}/{prefix}{projectKey}/{sessionId}/part-{epochMs13}-{rand6}.jsonl
 ```
 
+`projectKey`, `sessionId`, and `subpath` are percent-encoded before they are
+joined, so a slash in one component cannot select another session's prefix.
 Each `append()` writes a new part; `load()` lists, sorts, and concatenates
 them.
 
