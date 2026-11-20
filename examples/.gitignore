@@ -5,3 +5,6 @@ dist/
 .env.*
 bun.lock
 package-lock.json
+
+# This isolated CI example pins its complete npm dependency graph.
+!/loom-memory/package-lock.json
