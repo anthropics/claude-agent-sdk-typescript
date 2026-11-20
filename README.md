@@ -20,6 +20,11 @@ npm install @anthropic-ai/claude-agent-sdk
 
 The Claude Code SDK is now the Claude Agent SDK. Please check out the [migration guide](https://docs.claude.com/en/docs/claude-code/sdk/migration-guide) for details on breaking changes.
 
+## Examples
+
+[Explicit Loom memory tools](examples/loom-memory/) shows two in-process MCP tools
+with application-bound scope and offline client checks.
+
 ## Reporting Bugs
 
 We welcome your feedback. File a [GitHub issue](https://github.com/anthropics/claude-agent-sdk-typescript/issues) to report bugs or request features.
