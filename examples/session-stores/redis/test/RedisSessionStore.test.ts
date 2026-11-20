@@ -137,9 +137,46 @@ describe('RedisSessionStore (adapter-specific)', () => {
 
   test('load skips malformed JSON', async () => {
     const client = makeMockRedis()
-    await client.rpush('t:p:s', '{"type":"a"}', '{bad')
+    await client.rpush('t:entry:p:s', '{"type":"a"}', '{bad')
     const store = new RedisSessionStore({ client, prefix: 't' })
     expect(await store.load(KEY)).toEqual([{ type: 'a' }])
+  })
+
+  test('a session id cannot alias the session index or another tuple', async () => {
+    const client = makeMockRedis()
+    const store = new RedisSessionStore({ client, prefix: 't' })
+    await store.append(
+      { projectKey: 'p', sessionId: '__sessions' },
+      [{ type: 'index-alias' }],
+    )
+    await store.append(
+      { projectKey: 'p', sessionId: 'a:b' },
+      [{ type: 'colon' }],
+    )
+    await store.append(
+      { projectKey: 'p', sessionId: 'a', subpath: 'b' },
+      [{ type: 'sub' }],
+    )
+    expect(await store.listSessions('p')).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ sessionId: '__sessions' }),
+        expect.objectContaining({ sessionId: 'a:b' }),
+      ]),
+    )
+    expect(await store.load({ projectKey: 'p', sessionId: '__sessions' })).toEqual([
+      { type: 'index-alias' },
+    ])
+    expect(await store.load({ projectKey: 'p', sessionId: 'a:b' })).toEqual([
+      { type: 'colon' },
+    ])
+    expect(
+      await store.load({ projectKey: 'p', sessionId: 'a', subpath: 'b' }),
+    ).toEqual([{ type: 'sub' }])
+    const keys = await client.keys('*')
+    expect(keys).toContain('t:sessions:p')
+    expect(keys).toContain('t:entry:p:__sessions')
+    expect(keys).toContain('t:entry:p:a%3Ab')
+    expect(keys).toContain('t:entry:p:a:b')
   })
 
   test.each(['', 'p', 'p:', 'p:::'])(
