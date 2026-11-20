@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.330
+
+- Added a `system/informational` warning, tagged `settings_not_in_effect`, when `settings` or a user, project or local settings file fails validation and is not in effect
+- Fixed Claude still waiting for a background agent that `stopTask()` stopped just as it finished
+- Fixed variables that a `SessionStart` hook writes to `CLAUDE_ENV_FILE` not reaching the Bash tool with the `continue` option
+- Fixed Google Cloud's Agent Platform sessions ignoring `fastMode` in `settings` when the model comes from `ANTHROPIC_MODEL` or a settings file; such sessions now bill at the fast mode price
+- Fixed the initialize response's `fast_mode_state` describing the default model instead of the model the session runs
+- Fixed a lost or swapped tool result from an SDK MCP server when a call overlapped a reconnect; while an earlier request is unanswered, a new one can carry an `id` of 1,048,576 or more
+- Changed the TypeScript SDK's `query()` to fail with an error when `settings` is a JSON string that doesn't parse
+- Updated to parity with Claude Code v2.1.330
+
 ## 0.3.329
 
 - Added a `system/informational` warning, tagged `managed_hooks_not_loaded`, when hooks in managed settings fail to load
