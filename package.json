@@ -1,0 +1,14 @@
+{
+  "name": "claude-agent-sdk-timeout-fix",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test:bug": "node test-timeout-bug.mjs",
+    "test:bug-zero": "TIMEOUT_SECONDS=0 node test-timeout-bug.mjs",
+    "apply-patch": "node apply-patch.mjs",
+    "restore": "node restore-patch.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.50"
+  }
+}
