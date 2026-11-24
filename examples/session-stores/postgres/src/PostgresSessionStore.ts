@@ -42,10 +42,13 @@ export class PostgresSessionStore implements SessionStore {
         created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
     `)
-    const hash = createHash('sha256').update(this.table).digest('hex').slice(0, 8)
-    const sanitized = this.table.replace(/\./g, '_')
-    const prefix = sanitized.slice(0, 45)
-    const indexName = `${prefix}_${hash}_key_idx`
+    // Keep existing indexes on ordinary unqualified tables across upgrades.
+    let indexName = `${this.table}_key_idx`
+    if (this.table.includes('.') || indexName.length > 63) {
+      const hash = createHash('sha256').update(this.table).digest('hex').slice(0, 8)
+      const prefix = this.table.replace(/\./g, '_').slice(0, 45)
+      indexName = `${prefix}_${hash}_key_idx`
+    }
     await this.pool.query(`
       CREATE INDEX IF NOT EXISTS ${indexName}
         ON ${this.table} (project_key, session_id, subpath, id)

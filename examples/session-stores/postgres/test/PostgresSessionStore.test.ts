@@ -230,6 +230,15 @@ describe('PostgresSessionStore (adapter-specific)', () => {
     ).toThrow(/invalid tableName/)
   })
 
+  test('ensureSchema reuses the original index name on an existing default table', async () => {
+    const queries: string[] = []
+    const store = new PostgresSessionStore({ pool: makeMockPool(sql => queries.push(sql)) })
+    await store.ensureSchema()
+    expect(queries.find(sql => sql.includes('CREATE INDEX'))).toMatch(
+      /CREATE INDEX IF NOT EXISTS claude_session_entries_key_idx\s+ON claude_session_entries/,
+    )
+  })
+
   test('ensureSchema sanitizes index name and prevents collision for schema-qualified table', async () => {
     const executedQueries: string[] = []
     const pool = makeMockPool((sql: string) => executedQueries.push(sql))
