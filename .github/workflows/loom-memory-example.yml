@@ -1,0 +1,32 @@
+name: Loom memory example
+
+on:
+  pull_request:
+    paths:
+      - 'examples/loom-memory/**'
+      - '.github/workflows/loom-memory-example.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'examples/loom-memory/**'
+      - '.github/workflows/loom-memory-example.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  offline-memory-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: examples/loom-memory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: examples/loom-memory/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run check
