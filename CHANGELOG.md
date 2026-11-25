@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.332
+
+- Added `tool_result_meta[].rewritten_by_plugin`, set when a mod's `session.append` hook changed a tool result
+- Added the `PreSkillShellCommand` hook event with its input and output types
+- Fixed auto mode missing mid-turn user messages where feature flags aren't fetched, as on clouds or with telemetry off, from Opus 4.8 on. They count as the user's: mark other text `isSynthetic: true`
+- Changed `Query.setPermissionMode()` to resolve with `{ mode }`, the mode now in effect, or `undefined`; code that holds its promise as `Promise<void>` no longer compiles
+- Updated to parity with Claude Code v2.1.332
+
 ## 0.3.331
 
 - Added `sideload_flags_disabled` to `startup_failure_reason`, for a start that managed `disableSideloadFlags` refuses over a flag or launch option
